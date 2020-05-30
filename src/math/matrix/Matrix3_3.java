@@ -3,6 +3,17 @@ package math.matrix;
 import math.vec.Vector3;
 
 public class Matrix3_3 implements ISquareMatrix<Vector3> {
+  public static final Const<Matrix3_3> IDENTITY = new Const<>(new Matrix3_3(1, 0, 0,
+                                                                            0, 1, 0,
+                                                                            0, 0, 1));
+  public static final Const<Matrix3_3> ZERO = new Const<>(new Matrix3_3(0, 0, 0,
+                                                                        0, 0, 0,
+                                                                        0, 0, 0));
+  public static final Const<Matrix3_3> ONES = new Const<>(new Matrix3_3(1, 1, 1,
+                                                                        1, 1, 1,
+                                                                        1, 1, 1));
+
+
   private double[] elems;
 
   public Matrix3_3(double a00, double a01, double a02,

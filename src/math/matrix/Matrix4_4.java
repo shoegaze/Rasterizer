@@ -3,6 +3,20 @@ package math.matrix;
 import math.vec.Vector4;
 
 public class Matrix4_4 implements ISquareMatrix<Vector4> {
+  public static final Const<Matrix4_4> IDENTITY = new Const<>(new Matrix4_4(1, 0, 0, 0,
+                                                                            0, 1, 0, 0,
+                                                                            0, 0, 1, 0,
+                                                                            0, 0, 0, 1));
+  public static final Const<Matrix4_4> ZERO = new Const<>(new Matrix4_4(0, 0, 0, 0,
+                                                                        0, 0, 0, 0,
+                                                                        0, 0, 0, 0,
+                                                                        0, 0, 0, 0));
+  public static final Const<Matrix4_4> ONES = new Const<>(new Matrix4_4(1, 1, 1, 1,
+                                                                        1, 1, 1, 1,
+                                                                        1, 1, 1, 1,
+                                                                        1, 1, 1, 1));
+
+                                                                        
   private double[] elems;
 
   public Matrix4_4(double a00, double a01, double a02, double a03,
