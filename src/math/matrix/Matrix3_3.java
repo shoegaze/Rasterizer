@@ -66,4 +66,26 @@ public class Matrix3_3 implements ISquareMatrix<Vector3> {
            a01*(a10*a22 - a12*a20) +
            a02*(a10*a21 - a11*a20);
   }
+
+  @Override
+  public ISquareMatrix<Vector3> copy() {
+    return new Matrix3_3(
+      getCol(0),
+      getCol(1),
+      getCol(2));
+  }
+
+  @Override
+  public void setRow(int i, Vector3 row) {
+    for (int j = 0; j < 3; ++j) {
+      setElement(i, j, row.getElement(j));
+    }
+  }
+
+  @Override
+  public void setCol(int j, Vector3 col) {
+    for (int i = 0; i < 3; ++i) {
+      setElement(i, j, col.getElement(i));
+    }
+  }
 }

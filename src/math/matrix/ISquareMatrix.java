@@ -10,9 +10,12 @@ public interface ISquareMatrix<R extends IVector> {
   int getSize();
   int index2dTo1d(int i, int j);
   double getElement(int i, int j);
-  void setElement(int i, int j, double value);
   R getRow(int i);
   R getCol(int j);
+  void setElement(int i, int j, double value);
+  void setRow(int i, R row);
+  void setCol(int j, R col);
   double det();
   // R invert();
+  // R transposed();
 }

@@ -19,39 +19,61 @@ public final class Mutable<T extends ISquareMatrix<?>> implements IMatrixModifie
 
   @Override
   public Mutable<T> plus(T rhs) {
-    // TODO Auto-generated method stub
-    return null;
+    for (int i = 0; i < mat.getSize(); ++i) {
+      for (int j = 0; j < mat.getSize(); ++j) {
+        double l = mat.getElement(i, j);
+        double r = rhs.getElement(i, j);
+        mat.setElement(i, j, l+r);
+      }
+    }
+
+    return this;
   }
 
   @Override
   public Mutable<T> minus(T rhs) {
-    // TODO Auto-generated method stub
-    return null;
+    for (int i = 0; i < mat.getSize(); ++i) {
+      for (int j = 0; j < mat.getSize(); ++j) {
+        double l = mat.getElement(i, j);
+        double r = rhs.getElement(i, j);
+        mat.setElement(i, j, l-r);
+      }
+    }
+
+    return this;
   }
 
   @Override
   public Mutable<T> times(double s) {
-    // TODO Auto-generated method stub
-    return null;
+    for (int i = 0; i < mat.getSize(); ++i) {
+      for (int j = 0; j < mat.getSize(); ++j) {
+        double l = mat.getElement(i, j);
+        mat.setElement(i, j, l*s);
+      }
+    }
+
+    return this;
   }
 
   @Override
   public Mutable<T> divide(double s) {
-    // TODO Auto-generated method stub
-    return null;
+    return times(1/s);
   }
 
   @Override
   public Mutable<T> dot(T rhs) {
-    // TODO Auto-generated method stub
-    return null;
+    mat = new Const<>(mat)
+      .dot(rhs)
+      .getMatrix();
+
+    return this;
   }
 
-  @Override
-  public Mutable<T> invert() {
-    // TODO Auto-generated method stub
-    return null;
-  }
+  // @Override
+  // public Mutable<T> invert() {
+  //   // TODO Auto-generated method stub
+  //   return null;
+  // }
 
   @Override
   public double det() {

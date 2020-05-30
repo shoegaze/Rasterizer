@@ -1,5 +1,7 @@
 package math.matrix;
 
+import math.vec.IVector;
+
 public final class Const<T extends ISquareMatrix<?>> implements IMatrixModifier<T, Const<T>> {
   private T mat;
 
@@ -18,39 +20,77 @@ public final class Const<T extends ISquareMatrix<?>> implements IMatrixModifier<
 
   @Override
   public Const<T> plus(T rhs) {
-    // TODO Auto-generated method stub
-    return null;
+    @SuppressWarnings("unchecked")
+    T result = (T)mat.copy();
+
+    for (int i = 0; i < mat.getSize(); ++i) {
+      for (int j = 0; j < mat.getSize(); ++j) {
+        double l = mat.getElement(i, j);
+        double r = rhs.getElement(i, j);
+        result.setElement(i, j, l+r);
+      }
+    }
+
+    return new Const<>(result);
   }
 
   @Override
   public Const<T> minus(T rhs) {
-    // TODO Auto-generated method stub
-    return null;
+    @SuppressWarnings("unchecked")
+    T result = (T)mat.copy();
+
+    for (int i = 0; i < mat.getSize(); ++i) {
+      for (int j = 0; j < mat.getSize(); ++j) {
+        double l = mat.getElement(i, j);
+        double r = rhs.getElement(i, j);
+        result.setElement(i, j, l-r);
+      }
+    }
+
+    return new Const<>(result);
   }
 
   @Override
   public Const<T> times(double s) {
-    // TODO Auto-generated method stub
-    return null;
+    @SuppressWarnings("unchecked")
+    T result = (T)mat.copy();
+
+    for (int i = 0; i < mat.getSize(); ++i) {
+      for (int j = 0; j < mat.getSize(); ++j) {
+        double l = mat.getElement(i, j);
+        result.setElement(i, j, l*s);
+      }
+    }
+
+    return new Const<>(result);
   }
 
   @Override
   public Const<T> divide(double s) {
-    // TODO Auto-generated method stub
-    return null;
+    return times(1/s);
   }
 
   @Override
   public Const<T> dot(T rhs) {
-    // TODO Auto-generated method stub
-    return null;
+    @SuppressWarnings("unchecked")
+    T result = (T)mat.copy();
+
+    for (int i = 0; i < mat.getSize(); ++i) {
+      for (int j = 0; j < mat.getSize(); ++j) {
+        IVector l = mat.getRow(i);
+        IVector r = rhs.getCol(j);
+        result.setElement(i, j, new math.vec.Const<>(l).dot(r));
+      }
+    }
+
+    return new Const<>(result);
   }
 
-  @Override
-  public Const<T> invert() {
-    // TODO Auto-generated method stub
-    return null;
-  }
+  // @Override
+  // public Const<T> invert() {
+  //   T result = (T)mat.copy();
+  //   return new Const<>(result);
+  // }
 
   @Override
   public double det() {

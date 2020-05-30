@@ -4,6 +4,7 @@ import math.vec.Vector2;
 
 public class Matrix2_2 implements ISquareMatrix<Vector2> {
   private double[] elems;
+  // private boolean transposed = false;
 
   public Matrix2_2(double a00, double a01,
                    double a10, double a11) {
@@ -57,5 +58,26 @@ public class Matrix2_2 implements ISquareMatrix<Vector2> {
     double c = elems[1], d = elems[3];
 
     return a*b - c*d;
+  }
+
+  @Override
+  public ISquareMatrix<Vector2> copy() {
+    return new Matrix2_2(
+      getCol(0),
+      getCol(1));
+  }
+
+  @Override
+  public void setRow(int i, Vector2 row) {
+    for (int j = 0; j < 2; ++j) {
+      setElement(i, j, row.getElement(j));
+    }
+  }
+
+  @Override
+  public void setCol(int j, Vector2 col) {
+    for (int i = 0; i < 2; ++i) {
+      setElement(i, j, col.getElement(i));
+    }
   }
 }

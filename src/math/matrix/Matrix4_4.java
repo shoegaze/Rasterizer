@@ -67,4 +67,27 @@ public class Matrix4_4 implements ISquareMatrix<Vector4> {
     // TODO Auto-generated method stub
     return 0;
   }
+
+  @Override
+  public ISquareMatrix<Vector4> copy() {
+    return new Matrix4_4(
+      getRow(0),
+      getRow(1),
+      getRow(2),
+      getRow(3));
+  }
+
+  @Override
+  public void setRow(int i, Vector4 row) {
+    for (int j = 0; j < 4; ++j) {
+      setElement(i, j, row.getElement(j));
+    }
+  }
+
+  @Override
+  public void setCol(int j, Vector4 col) {
+    for (int i = 0; i < 4; ++i) {
+      setElement(i, j, col.getElement(i));
+    }
+  }
 }
