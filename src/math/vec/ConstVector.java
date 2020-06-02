@@ -16,6 +16,11 @@ public class ConstVector<T extends Vector> implements IVectorModifier<T, ConstVe
   }
 
   @Override
+  public boolean equals(T rhs, double epsilon) {
+    return vec.equals(rhs, epsilon);
+  }
+
+  @Override
   public String toString() {
     return "Const:" + vec.toString();
   }

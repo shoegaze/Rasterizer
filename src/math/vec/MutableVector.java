@@ -17,6 +17,11 @@ public final class MutableVector<T extends Vector> implements IVectorModifier<T,
   }
 
   @Override
+  public boolean equals(T rhs, double epsilon) {
+    return vec.equals(rhs, epsilon);
+  }
+
+  @Override
   public String toString() {
     return "Mutable:" + vec.toString();
   }

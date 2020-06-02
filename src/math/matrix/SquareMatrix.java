@@ -1,7 +1,6 @@
 package math.matrix;
 
 import java.util.Arrays;
-
 import math.vec.Vector;
 
 // Column-major square matrix

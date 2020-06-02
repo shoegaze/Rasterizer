@@ -1,7 +1,7 @@
 package math.vec;
 
-public interface IVectorOperator<T extends IVector, R extends IVectorModifier<T,?>> {
-  // TODO: boolean equals(T rhs, double epsilon);
+public interface IVectorOperator<T extends Vector, R extends IVectorModifier<T,?>> {
+  boolean equals(T rhs, double epsilon);
   R plus(T rhs);
   R minus(T rhs);
   R times(double s);
@@ -10,6 +10,6 @@ public interface IVectorOperator<T extends IVector, R extends IVectorModifier<T,
   double dot(T rhs);
   double magnitude_2();
   double magnitude();
-  Normal<T> normalized();
+  NormalVector<T> normalized();
   R cross(Vector3 rhs);
 }
