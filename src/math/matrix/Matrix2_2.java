@@ -3,11 +3,11 @@ package math.matrix;
 import math.vec.Vector2;
 
 public class Matrix2_2 extends SquareMatrix<Vector2> {
-  public static final Const<Matrix2_2> IDENTITY = new Const<>(new Matrix2_2(1, 0,
+  public static final ConstMatrix<Matrix2_2> IDENTITY = new ConstMatrix<>(new Matrix2_2(1, 0,
                                                                             0, 1));
-  public static final Const<Matrix2_2> ZERO = new Const<>(new Matrix2_2(0, 0,
+  public static final ConstMatrix<Matrix2_2> ZERO = new ConstMatrix<>(new Matrix2_2(0, 0,
                                                                         0, 0));
-  public static final Const<Matrix2_2> ONES = new Const<>(new Matrix2_2(1, 1,
+  public static final ConstMatrix<Matrix2_2> ONES = new ConstMatrix<>(new Matrix2_2(1, 1,
                                                                         1, 1));
 
 

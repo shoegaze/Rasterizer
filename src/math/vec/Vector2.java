@@ -1,12 +1,12 @@
 package math.vec;
 
 public final class Vector2 extends Vector {
-  public static final Const<Vector2> ZERO = new Const<>(new Vector2(0, 0));
-  public static final Const<Vector2> ONES = new Const<>(new Vector2(1, 1));
-  public static final Const<Vector2> RIGHT = new Const<>(new Vector2(1, 0));
-  public static final Const<Vector2> LEFT = new Const<>(new Vector2(-1, 0));
-  public static final Const<Vector2> UP = new Const<>(new Vector2(0, 1));
-  public static final Const<Vector2> DOWN = new Const<>(new Vector2(0, -1));
+  public static final ConstVector<Vector2> ZERO = new ConstVector<>(new Vector2(0, 0));
+  public static final ConstVector<Vector2> ONES = new ConstVector<>(new Vector2(1, 1));
+  public static final ConstVector<Vector2> RIGHT = new ConstVector<>(new Vector2(1, 0));
+  public static final ConstVector<Vector2> LEFT = new ConstVector<>(new Vector2(-1, 0));
+  public static final ConstVector<Vector2> UP = new ConstVector<>(new Vector2(0, 1));
+  public static final ConstVector<Vector2> DOWN = new ConstVector<>(new Vector2(0, -1));
 
 
   public Vector2(double x, double y) {

@@ -3,13 +3,13 @@ package math.matrix;
 import math.vec.Vector3;
 
 public class Matrix3_3 extends SquareMatrix<Vector3> {
-  public static final Const<Matrix3_3> IDENTITY = new Const<>(new Matrix3_3(1, 0, 0,
+  public static final ConstMatrix<Matrix3_3> IDENTITY = new ConstMatrix<>(new Matrix3_3(1, 0, 0,
                                                                             0, 1, 0,
                                                                             0, 0, 1));
-  public static final Const<Matrix3_3> ZERO = new Const<>(new Matrix3_3(0, 0, 0,
+  public static final ConstMatrix<Matrix3_3> ZERO = new ConstMatrix<>(new Matrix3_3(0, 0, 0,
                                                                         0, 0, 0,
                                                                         0, 0, 0));
-  public static final Const<Matrix3_3> ONES = new Const<>(new Matrix3_3(1, 1, 1,
+  public static final ConstMatrix<Matrix3_3> ONES = new ConstMatrix<>(new Matrix3_3(1, 1, 1,
                                                                         1, 1, 1,
                                                                         1, 1, 1));
 

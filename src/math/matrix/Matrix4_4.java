@@ -3,15 +3,15 @@ package math.matrix;
 import math.vec.Vector4;
 
 public class Matrix4_4 extends SquareMatrix<Vector4> {
-  public static final Const<Matrix4_4> IDENTITY = new Const<>(new Matrix4_4(1, 0, 0, 0,
+  public static final ConstMatrix<Matrix4_4> IDENTITY = new ConstMatrix<>(new Matrix4_4(1, 0, 0, 0,
                                                                             0, 1, 0, 0,
                                                                             0, 0, 1, 0,
                                                                             0, 0, 0, 1));
-  public static final Const<Matrix4_4> ZERO = new Const<>(new Matrix4_4(0, 0, 0, 0,
+  public static final ConstMatrix<Matrix4_4> ZERO = new ConstMatrix<>(new Matrix4_4(0, 0, 0, 0,
                                                                         0, 0, 0, 0,
                                                                         0, 0, 0, 0,
                                                                         0, 0, 0, 0));
-  public static final Const<Matrix4_4> ONES = new Const<>(new Matrix4_4(1, 1, 1, 1,
+  public static final ConstMatrix<Matrix4_4> ONES = new ConstMatrix<>(new Matrix4_4(1, 1, 1, 1,
                                                                         1, 1, 1, 1,
                                                                         1, 1, 1, 1,
                                                                         1, 1, 1, 1));

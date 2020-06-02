@@ -1,16 +1,16 @@
 package math.vec;
 
 public final class Vector4 extends Vector {
-  public static final Const<Vector4> ZERO = new Const<>(new Vector4(0, 0, 0, 0));
-  public static final Const<Vector4> ONES = new Const<>(new Vector4(1, 1, 1, 1));
-  public static final Const<Vector4> RIGHT = new Const<>(new Vector4(1, 0, 0, 0));
-  public static final Const<Vector4> LEFT = new Const<>(new Vector4(-1, 0, 0, 0));
-  public static final Const<Vector4> UP = new Const<>(new Vector4(0, 1, 0, 0));
-  public static final Const<Vector4> DOWN = new Const<>(new Vector4(0, -1, 0, 0));
-  public static final Const<Vector4> FORWARD = new Const<>(new Vector4(0, 0, 1, 0));
-  public static final Const<Vector4> BACKWARD = new Const<>(new Vector4(0, 0, -1, 0));
-  public static final Const<Vector4> POSITIVE_W = new Const<>(new Vector4(0, 0, 0, 1));
-  public static final Const<Vector4> NEGATIVE_W = new Const<>(new Vector4(0, 0, 0, -1));
+  public static final ConstVector<Vector4> ZERO = new ConstVector<>(new Vector4(0, 0, 0, 0));
+  public static final ConstVector<Vector4> ONES = new ConstVector<>(new Vector4(1, 1, 1, 1));
+  public static final ConstVector<Vector4> RIGHT = new ConstVector<>(new Vector4(1, 0, 0, 0));
+  public static final ConstVector<Vector4> LEFT = new ConstVector<>(new Vector4(-1, 0, 0, 0));
+  public static final ConstVector<Vector4> UP = new ConstVector<>(new Vector4(0, 1, 0, 0));
+  public static final ConstVector<Vector4> DOWN = new ConstVector<>(new Vector4(0, -1, 0, 0));
+  public static final ConstVector<Vector4> FORWARD = new ConstVector<>(new Vector4(0, 0, 1, 0));
+  public static final ConstVector<Vector4> BACKWARD = new ConstVector<>(new Vector4(0, 0, -1, 0));
+  public static final ConstVector<Vector4> POSITIVE_W = new ConstVector<>(new Vector4(0, 0, 0, 1));
+  public static final ConstVector<Vector4> NEGATIVE_W = new ConstVector<>(new Vector4(0, 0, 0, -1));
 
 
   public Vector4(double x, double y, double z, double w) {
