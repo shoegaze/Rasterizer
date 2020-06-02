@@ -1,6 +1,5 @@
 package math.vec;
 
-// TODO: Impl. toString()
 public final class Normal<T extends Vector> extends Const<T> {
   public static <T extends Vector> Normal<T> from(T src) {
     return new Const<T>(src).normalized();

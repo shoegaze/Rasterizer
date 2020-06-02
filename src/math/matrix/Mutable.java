@@ -1,6 +1,6 @@
 package math.matrix;
 
-public final class Mutable<T extends ISquareMatrix<?>> implements IMatrixModifier<T, Mutable<T>> {
+public final class Mutable<T extends SquareMatrix<?>> implements IMatrixModifier<T, Mutable<T>> {
   private T mat;
 
   @SuppressWarnings("unchecked")

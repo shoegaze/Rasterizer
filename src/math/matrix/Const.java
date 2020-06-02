@@ -2,7 +2,7 @@ package math.matrix;
 
 import math.vec.Vector;
 
-public final class Const<T extends ISquareMatrix<?>> implements IMatrixModifier<T, Const<T>> {
+public final class Const<T extends SquareMatrix<?>> implements IMatrixModifier<T, Const<T>> {
   private T mat;
 
   public Const(T src) {

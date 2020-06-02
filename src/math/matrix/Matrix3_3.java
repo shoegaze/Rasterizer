@@ -2,7 +2,7 @@ package math.matrix;
 
 import math.vec.Vector3;
 
-public class Matrix3_3 implements ISquareMatrix<Vector3> {
+public class Matrix3_3 extends SquareMatrix<Vector3> {
   public static final Const<Matrix3_3> IDENTITY = new Const<>(new Matrix3_3(1, 0, 0,
                                                                             0, 1, 0,
                                                                             0, 0, 1));
@@ -14,15 +14,14 @@ public class Matrix3_3 implements ISquareMatrix<Vector3> {
                                                                         1, 1, 1));
 
 
-  private double[] elems;
-
   public Matrix3_3(double a00, double a01, double a02,
                    double a10, double a11, double a12,
                    double a20, double a21, double a22) {
 
-    elems = new double[]{a00, a10, a20,
-                         a01, a11, a21,
-                         a02, a12, a22};
+    // Pass columns first in super
+    super(a00, a10, a20,
+          a01, a11, a21,
+          a02, a12, a22);
   }
 
   public Matrix3_3(Vector3 ai0, Vector3 ai1, Vector3 ai2) {
@@ -34,21 +33,6 @@ public class Matrix3_3 implements ISquareMatrix<Vector3> {
   @Override
   public int getSize() {
     return 3;
-  }
-
-  @Override
-  public int index2dTo1d(int i, int j) {
-    return 3*j + i;
-  }
-
-  @Override
-  public double getElement(int i, int j) {
-    return elems[index2dTo1d(i, j)];
-  }
-
-  @Override
-  public void setElement(int i, int j, double value) {
-    elems[index2dTo1d(i, j)] = value;
   }
 
   @Override
@@ -79,24 +63,10 @@ public class Matrix3_3 implements ISquareMatrix<Vector3> {
   }
 
   @Override
-  public ISquareMatrix<Vector3> copy() {
+  public SquareMatrix<Vector3> copy() {
     return new Matrix3_3(
       getCol(0),
       getCol(1),
       getCol(2));
-  }
-
-  @Override
-  public void setRow(int i, Vector3 row) {
-    for (int j = 0; j < 3; ++j) {
-      setElement(i, j, row.getElement(j));
-    }
-  }
-
-  @Override
-  public void setCol(int j, Vector3 col) {
-    for (int i = 0; i < 3; ++i) {
-      setElement(i, j, col.getElement(i));
-    }
   }
 }

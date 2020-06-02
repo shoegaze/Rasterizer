@@ -2,7 +2,7 @@ package math.matrix;
 
 import math.vec.Vector4;
 
-public class Matrix4_4 implements ISquareMatrix<Vector4> {
+public class Matrix4_4 extends SquareMatrix<Vector4> {
   public static final Const<Matrix4_4> IDENTITY = new Const<>(new Matrix4_4(1, 0, 0, 0,
                                                                             0, 1, 0, 0,
                                                                             0, 0, 1, 0,
@@ -16,18 +16,17 @@ public class Matrix4_4 implements ISquareMatrix<Vector4> {
                                                                         1, 1, 1, 1,
                                                                         1, 1, 1, 1));
 
-                                                                        
-  private double[] elems;
 
   public Matrix4_4(double a00, double a01, double a02, double a03,
                    double a10, double a11, double a12, double a13,
                    double a20, double a21, double a22, double a23,
                    double a30, double a31, double a32, double a33) {
 
-    elems = new double[] {a00, a10, a20, a30,
-                          a01, a11, a21, a31,
-                          a02, a12, a22, a32,
-                          a03, a13, a23, a33};
+    // Pass columns first in super
+    super(a00, a10, a20, a30,
+          a01, a11, a21, a31,
+          a02, a12, a22, a32,
+          a03, a13, a23, a33);
   }
 
   public Matrix4_4(Vector4 ai0, Vector4 ai1, Vector4 ai2, Vector4 ai3) {
@@ -41,21 +40,6 @@ public class Matrix4_4 implements ISquareMatrix<Vector4> {
   @Override
   public int getSize() {
     return 4;
-  }
-
-  @Override
-  public int index2dTo1d(int i, int j) {
-    return 4*j + i;
-  }
-
-  @Override
-  public double getElement(int i, int j) {
-    return elems[index2dTo1d(i, j)];
-  }
-
-  @Override
-  public void setElement(int i, int j, double value) {
-    elems[index2dTo1d(i, j)] = value;
   }
 
   @Override
@@ -83,25 +67,11 @@ public class Matrix4_4 implements ISquareMatrix<Vector4> {
   }
 
   @Override
-  public ISquareMatrix<Vector4> copy() {
+  public SquareMatrix<Vector4> copy() {
     return new Matrix4_4(
       getRow(0),
       getRow(1),
       getRow(2),
       getRow(3));
-  }
-
-  @Override
-  public void setRow(int i, Vector4 row) {
-    for (int j = 0; j < 4; ++j) {
-      setElement(i, j, row.getElement(j));
-    }
-  }
-
-  @Override
-  public void setCol(int j, Vector4 col) {
-    for (int i = 0; i < 4; ++i) {
-      setElement(i, j, col.getElement(i));
-    }
   }
 }
