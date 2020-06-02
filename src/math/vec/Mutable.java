@@ -1,7 +1,6 @@
 package math.vec;
 
-// TODO: Impl. toString()
-public final class Mutable<T extends IVector> implements IVectorModifier<T, Mutable<T>> {
+public final class Mutable<T extends Vector> implements IVectorModifier<T, Mutable<T>> {
   private T vec;
 
   @SuppressWarnings("unchecked")
@@ -15,6 +14,11 @@ public final class Mutable<T extends IVector> implements IVectorModifier<T, Muta
 
   public Const<T> freeze() {
     return new Const<>(vec);
+  }
+
+  @Override
+  public String toString() {
+    return "Mutable:" + vec.toString();
   }
 
   @Override
@@ -97,9 +101,9 @@ public final class Mutable<T extends IVector> implements IVectorModifier<T, Muta
     }
 
     Vector3 lhs = (Vector3)vec;
-    double x = lhs.y*rhs.z - lhs.z*rhs.y;
-    double y = lhs.z*rhs.x - lhs.x*rhs.z;
-    double z = lhs.x*rhs.y - lhs.y*rhs.x;
+    double x = lhs.y()*rhs.z() - lhs.z()*rhs.y();
+    double y = lhs.z()*rhs.x() - lhs.x()*rhs.z();
+    double z = lhs.x()*rhs.y() - lhs.y()*rhs.x();
 
     lhs.setElement(0, x);
     lhs.setElement(1, y);

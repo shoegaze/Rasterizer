@@ -1,7 +1,6 @@
 package math.vec;
 
-// TODO: Impl. toString()
-public class Const<T extends IVector> implements IVectorModifier<T, Const<T>> {
+public class Const<T extends Vector> implements IVectorModifier<T, Const<T>> {
   private final T vec;
 
   public Const(T src) {
@@ -17,6 +16,11 @@ public class Const<T extends IVector> implements IVectorModifier<T, Const<T>> {
   }
 
   @Override
+  public String toString() {
+    return "Const:" + vec.toString();
+  }
+
+  @Override
   public T getVec() {
     return vec;
   }
@@ -28,8 +32,7 @@ public class Const<T extends IVector> implements IVectorModifier<T, Const<T>> {
 
     for (int i = 0; i < vec.getSize(); ++i) {
       result.setElement(
-        i,
-        vec.getElement(i) + rhs.getElement(i));
+        i, vec.getElement(i) + rhs.getElement(i));
     }
 
     return new Const<>(result);
@@ -42,8 +45,7 @@ public class Const<T extends IVector> implements IVectorModifier<T, Const<T>> {
 
     for (int i = 0; i < vec.getSize(); ++i) {
       result.setElement(
-        i,
-        vec.getElement(i) - rhs.getElement(i));
+        i, vec.getElement(i) - rhs.getElement(i));
     }
 
     return new Const<>(result);
@@ -56,8 +58,7 @@ public class Const<T extends IVector> implements IVectorModifier<T, Const<T>> {
 
     for (int i = 0; i < vec.getSize(); ++i) {
       result.setElement(
-        i,
-        vec.getElement(i) * s);
+        i, vec.getElement(i) * s);
     }
     return new Const<>(result);
   }
@@ -100,18 +101,18 @@ public class Const<T extends IVector> implements IVectorModifier<T, Const<T>> {
 
   @Override
   public Const<T> cross(Vector3 rhs) {
+    // HACK
     if (!(vec instanceof Vector3)) {
       throw new IllegalCallerException();
     }
 
     Vector3 lhs = (Vector3)vec.copy();
-    double x = lhs.y*rhs.z - lhs.z*rhs.y;
-    double y = lhs.z*rhs.x - lhs.x*rhs.z;
-    double z = lhs.x*rhs.y - lhs.y*rhs.x;
+    double x = lhs.y()*rhs.z() - lhs.z()*rhs.y();
+    double y = lhs.z()*rhs.x() - lhs.x()*rhs.z();
+    double z = lhs.x()*rhs.y() - lhs.y()*rhs.x();
 
     @SuppressWarnings("unchecked")
     T result = (T)new Vector3(x, y, z);
-
     return new Const<>(result);
   }
 }
