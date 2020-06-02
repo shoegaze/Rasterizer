@@ -15,6 +15,11 @@ public final class Normal<T extends Vector> extends Const<T> {
   }
 
   @Override
+  public String toString() {
+    return "Normal:" + vec.toString();
+  }
+
+  @Override
   public double magnitude_2() {
     return 1;
   }

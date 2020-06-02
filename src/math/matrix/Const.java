@@ -1,6 +1,6 @@
 package math.matrix;
 
-import math.vec.IVector;
+import math.vec.Vector;
 
 public final class Const<T extends ISquareMatrix<?>> implements IMatrixModifier<T, Const<T>> {
   private T mat;
@@ -77,8 +77,8 @@ public final class Const<T extends ISquareMatrix<?>> implements IMatrixModifier<
 
     for (int i = 0; i < mat.getSize(); ++i) {
       for (int j = 0; j < mat.getSize(); ++j) {
-        IVector l = mat.getRow(i);
-        IVector r = rhs.getCol(j);
+        Vector l = mat.getRow(i);
+        Vector r = rhs.getCol(j);
         result.setElement(i, j, new math.vec.Const<>(l).dot(r));
       }
     }

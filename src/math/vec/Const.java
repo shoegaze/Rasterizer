@@ -1,7 +1,7 @@
 package math.vec;
 
 public class Const<T extends Vector> implements IVectorModifier<T, Const<T>> {
-  private final T vec;
+  protected final T vec;
 
   public Const(T src) {
     vec = src;

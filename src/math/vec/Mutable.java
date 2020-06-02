@@ -30,8 +30,7 @@ public final class Mutable<T extends Vector> implements IVectorModifier<T, Mutab
   public Mutable<T> plus(T rhs) {
     for (int i = 0; i < vec.getSize(); ++i) {
       vec.setElement(
-        i,
-        vec.getElement(i) + rhs.getElement(i));
+        i, vec.getElement(i) + rhs.getElement(i));
     }
 
     return this;
@@ -41,8 +40,7 @@ public final class Mutable<T extends Vector> implements IVectorModifier<T, Mutab
   public Mutable<T> minus(T rhs) {
     for (int i = 0; i < vec.getSize(); ++i) {
       vec.setElement(
-        i,
-        vec.getElement(i) - rhs.getElement(i));
+        i, vec.getElement(i) - rhs.getElement(i));
     }
 
     return this;
@@ -52,8 +50,7 @@ public final class Mutable<T extends Vector> implements IVectorModifier<T, Mutab
   public Mutable<T> times(double s) {
     for (int i = 0; i < vec.getSize(); ++i) {
       vec.setElement(
-        i,
-        vec.getElement(i) * s);
+        i, vec.getElement(i) * s);
     }
     return this;
   }
