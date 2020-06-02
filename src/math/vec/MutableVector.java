@@ -1,17 +1,21 @@
 package math.vec;
 
-public final class MutableVector<T extends Vector> implements IVectorModifier<T, MutableVector<T>> {
+import math.IFreeze;
+
+public final class MutableVector<T extends Vector>
+  implements IVectorModifier<T, MutableVector<T>>, IFreeze<ConstVector<T>> {
+
   private T vec;
 
-  @SuppressWarnings("unchecked")
   public MutableVector(T src) {
-    vec = (T)src.copy();
+    vec = src;
   }
 
   public MutableVector(IVectorModifier<T, ?> src) {
     this(src.getVec());
   }
 
+  @Override
   public ConstVector<T> freeze() {
     return new ConstVector<>(vec);
   }

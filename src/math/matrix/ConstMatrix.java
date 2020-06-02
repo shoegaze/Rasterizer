@@ -1,8 +1,11 @@
 package math.matrix;
 
+import math.IMutate;
 import math.vec.Vector;
 
-public final class ConstMatrix<T extends SquareMatrix<?>> implements IMatrixModifier<T, ConstMatrix<T>> {
+public final class ConstMatrix<T extends SquareMatrix<?>>
+  implements IMatrixModifier<T, ConstMatrix<T>>, IMutate<MutableMatrix<T>> {
+
   private T mat;
 
   public ConstMatrix(T src) {
@@ -11,6 +14,12 @@ public final class ConstMatrix<T extends SquareMatrix<?>> implements IMatrixModi
 
   public ConstMatrix(IMatrixModifier<T,?> src) {
     mat = src.getMatrix();
+  }
+
+  @Override
+  @SuppressWarnings("unchecked")
+  public MutableMatrix<T> mutate() {
+    return new MutableMatrix<>((T)mat.copy());
   }
 
   @Override

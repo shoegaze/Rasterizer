@@ -1,6 +1,10 @@
 package math.vec;
 
-public class ConstVector<T extends Vector> implements IVectorModifier<T, ConstVector<T>> {
+import math.IMutate;
+
+public class ConstVector<T extends Vector>
+  implements IVectorModifier<T, ConstVector<T>>, IMutate<MutableVector<T>> {
+
   protected final T vec;
 
   public ConstVector(T src) {
@@ -11,8 +15,10 @@ public class ConstVector<T extends Vector> implements IVectorModifier<T, ConstVe
     this(src.getVec());
   }
 
+  @Override
+  @SuppressWarnings("unchecked")
   public MutableVector<T> mutate() {
-    return new MutableVector<>(vec);
+    return new MutableVector<>((T)vec.copy());
   }
 
   @Override

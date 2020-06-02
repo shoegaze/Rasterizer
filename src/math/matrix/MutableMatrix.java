@@ -1,6 +1,10 @@
 package math.matrix;
 
-public final class MutableMatrix<T extends SquareMatrix<?>> implements IMatrixModifier<T, MutableMatrix<T>> {
+import math.IFreeze;
+
+public final class MutableMatrix<T extends SquareMatrix<?>>
+  implements IMatrixModifier<T, MutableMatrix<T>>, IFreeze<ConstMatrix<T>> {
+
   private T mat;
 
   @SuppressWarnings("unchecked")
@@ -10,6 +14,11 @@ public final class MutableMatrix<T extends SquareMatrix<?>> implements IMatrixMo
 
   public MutableMatrix(IMatrixModifier<T, ?> src) {
     this(src.getMatrix());
+  }
+
+  @Override
+  public ConstMatrix<T> freeze() {
+    return new ConstMatrix<>(mat);
   }
 
   @Override
