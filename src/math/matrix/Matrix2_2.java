@@ -4,17 +4,17 @@ import math.vec.Vector2;
 
 public class Matrix2_2 extends SquareMatrix<Vector2> {
   public static final ConstMatrix<Matrix2_2> IDENTITY = new ConstMatrix<>(new Matrix2_2(1, 0,
-                                                                            0, 1));
+                                                                                        0, 1));
   public static final ConstMatrix<Matrix2_2> ZERO = new ConstMatrix<>(new Matrix2_2(0, 0,
-                                                                        0, 0));
+                                                                                    0, 0));
   public static final ConstMatrix<Matrix2_2> ONES = new ConstMatrix<>(new Matrix2_2(1, 1,
-                                                                        1, 1));
+                                                                                    1, 1));
 
 
   public Matrix2_2(double a00, double a01,
                    double a10, double a11) {
 
-    // Pass columns first in super
+    // Pass column-first to super
     super(a00, a10,
           a01, a11);
   }
@@ -48,7 +48,17 @@ public class Matrix2_2 extends SquareMatrix<Vector2> {
     double a = getElement(0, 0), b = getElement(0, 1);
     double c = getElement(1, 0), d = getElement(1, 1);
 
-    return a*b - c*d;
+    return a*d - b*c;
+  }
+
+  @Override
+  public void invert() {
+    double a = getElement(0, 0), b = getElement(0, 1);
+    double c = getElement(1, 0), d = getElement(1, 1);
+    double det = det();
+
+    setElement(0, 0,  d/det); setElement(0, 1, -b/det);
+    setElement(1, 0, -c/det); setElement(1, 1,  a/det);
   }
 
   @Override

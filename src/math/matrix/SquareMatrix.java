@@ -10,15 +10,16 @@ public abstract class SquareMatrix<R extends Vector> {
 
   protected SquareMatrix(double ...elements) {
     // TODO: check if there are n^2 elements in array
-    this.elements = elements.clone();
+    this.elements = elements;
   }
 
   public abstract SquareMatrix<R> copy();
   public abstract int getSize();
   public abstract R getRow(int i);
   public abstract R getCol(int j);
+  // TODO: move to MatrixOperators
   public abstract double det();
-  // public abstract R invert();
+  public abstract void invert();
 
   public final boolean equals(SquareMatrix<?> rhs, double epsilon) {
     if (this.getClass() != rhs.getClass()) {
@@ -44,12 +45,6 @@ public abstract class SquareMatrix<R extends Vector> {
     return Arrays.toString(cols);
   }
 
-  protected final int index2dTo1d(int i, int j) {
-    return transposed?
-      getSize()*i + j :
-      getSize()*j + i;
-  }
-
   public final double getElement(int i, int j) {
     return elements[index2dTo1d(i, j)];
   }
@@ -72,5 +67,24 @@ public abstract class SquareMatrix<R extends Vector> {
 
   public final void transpose() {
     transposed = !transposed;
+  }
+
+  protected final int index2dTo1d(int i, int j) {
+    return transposed?
+      getSize()*i + j :
+      getSize()*j + i;
+  }
+
+  @FunctionalInterface
+  protected interface ElementMapper {
+    double map(int i, int j, double value);
+  }
+
+  protected final void mapElements(ElementMapper mapper) {
+    for (int i = 0; i < getSize(); ++i) {
+      for (int j = 0; j < getSize(); ++j) {
+        setElement(i, j, mapper.map(i, j, getElement(i, j)));
+      }
+    }
   }
 }

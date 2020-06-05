@@ -2,6 +2,7 @@ package math.matrix;
 
 import math.IMutate;
 import math.vec.Vector;
+import math.vec.ConstVector;
 
 public final class ConstMatrix<T extends SquareMatrix<?>>
   implements IMatrixModifier<T, ConstMatrix<T>>, IMutate<MutableMatrix<T>> {
@@ -93,18 +94,21 @@ public final class ConstMatrix<T extends SquareMatrix<?>>
       for (int j = 0; j < mat.getSize(); ++j) {
         Vector l = mat.getRow(i);
         Vector r = rhs.getCol(j);
-        result.setElement(i, j, new math.vec.ConstVector<>(l).dot(r));
+        result.setElement(i, j, new ConstVector<>(l).dot(r));
       }
     }
 
     return new ConstMatrix<>(result);
   }
 
-  // @Override
-  // public Const<T> invert() {
-  //   T result = (T)mat.copy();
-  //   return new Const<>(result);
-  // }
+  @Override
+  public ConstMatrix<T> invert() {
+    @SuppressWarnings("unchecked")
+    T result = (T)mat.copy();
+    result.invert();
+
+    return new ConstMatrix<>(result);
+  }
 
   @Override
   public double det() {

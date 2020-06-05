@@ -4,14 +4,14 @@ import math.vec.Vector3;
 
 public class Matrix3_3 extends SquareMatrix<Vector3> {
   public static final ConstMatrix<Matrix3_3> IDENTITY = new ConstMatrix<>(new Matrix3_3(1, 0, 0,
-                                                                            0, 1, 0,
-                                                                            0, 0, 1));
+                                                                                        0, 1, 0,
+                                                                                        0, 0, 1));
   public static final ConstMatrix<Matrix3_3> ZERO = new ConstMatrix<>(new Matrix3_3(0, 0, 0,
-                                                                        0, 0, 0,
-                                                                        0, 0, 0));
+                                                                                    0, 0, 0,
+                                                                                    0, 0, 0));
   public static final ConstMatrix<Matrix3_3> ONES = new ConstMatrix<>(new Matrix3_3(1, 1, 1,
-                                                                        1, 1, 1,
-                                                                        1, 1, 1));
+                                                                                    1, 1, 1,
+                                                                                    1, 1, 1));
 
 
   public Matrix3_3(double a00, double a01, double a02,
@@ -60,6 +60,11 @@ public class Matrix3_3 extends SquareMatrix<Vector3> {
     return a00*(a11*a22 - a12*a21) -
            a01*(a10*a22 - a12*a20) +
            a02*(a10*a21 - a11*a20);
+  }
+
+  @Override
+  public void invert() {
+    // TODO: stub
   }
 
   @Override

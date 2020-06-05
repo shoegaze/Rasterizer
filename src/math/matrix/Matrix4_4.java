@@ -4,17 +4,17 @@ import math.vec.Vector4;
 
 public class Matrix4_4 extends SquareMatrix<Vector4> {
   public static final ConstMatrix<Matrix4_4> IDENTITY = new ConstMatrix<>(new Matrix4_4(1, 0, 0, 0,
-                                                                            0, 1, 0, 0,
-                                                                            0, 0, 1, 0,
-                                                                            0, 0, 0, 1));
+                                                                                        0, 1, 0, 0,
+                                                                                        0, 0, 1, 0,
+                                                                                        0, 0, 0, 1));
   public static final ConstMatrix<Matrix4_4> ZERO = new ConstMatrix<>(new Matrix4_4(0, 0, 0, 0,
-                                                                        0, 0, 0, 0,
-                                                                        0, 0, 0, 0,
-                                                                        0, 0, 0, 0));
+                                                                                    0, 0, 0, 0,
+                                                                                    0, 0, 0, 0,
+                                                                                    0, 0, 0, 0));
   public static final ConstMatrix<Matrix4_4> ONES = new ConstMatrix<>(new Matrix4_4(1, 1, 1, 1,
-                                                                        1, 1, 1, 1,
-                                                                        1, 1, 1, 1,
-                                                                        1, 1, 1, 1));
+                                                                                    1, 1, 1, 1,
+                                                                                    1, 1, 1, 1,
+                                                                                    1, 1, 1, 1));
 
 
   public Matrix4_4(double a00, double a01, double a02, double a03,
@@ -62,8 +62,29 @@ public class Matrix4_4 extends SquareMatrix<Vector4> {
 
   @Override
   public double det() {
+    double a00 = getElement(0, 0), a01 = getElement(0, 1), a02 = getElement(0, 2), a03 = getElement(0, 3);
+    double a10 = getElement(1, 0), a11 = getElement(1, 1), a12 = getElement(1, 2), a13 = getElement(1, 3);
+    double a20 = getElement(2, 0), a21 = getElement(2, 1), a22 = getElement(2, 2), a23 = getElement(2, 3);
+    double a30 = getElement(3, 0), a31 = getElement(3, 1), a32 = getElement(3, 2), a33 = getElement(3, 3);
+
+    // wow
+    return a00*(new Matrix3_3(a11, a12, a13,
+                              a21, a22, a23,
+                              a31, a32, a33).det()) -
+           a01*(new Matrix3_3(a10, a12, a13,
+                              a20, a22, a23,
+                              a30, a32, a33).det()) +
+           a02*(new Matrix3_3(a10, a11, a13,
+                              a20, a21, a23,
+                              a30, a31, a33).det()) -
+           a03*(new Matrix3_3(a10, a11, a12,
+                              a20, a21, a22,
+                              a30, a31, a32).det());
+  }
+
+  @Override
+  public void invert() {
     // TODO Auto-generated method stub
-    return 0;
   }
 
   @Override

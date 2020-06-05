@@ -83,11 +83,12 @@ public final class MutableMatrix<T extends SquareMatrix<?>>
     return this;
   }
 
-  // @Override
-  // public Mutable<T> invert() {
-  //   // TODO Auto-generated method stub
-  //   return null;
-  // }
+  @Override
+  public MutableMatrix<T> invert() {
+    mat.invert();
+
+    return this;
+  }
 
   @Override
   public double det() {
