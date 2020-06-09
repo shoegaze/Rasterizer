@@ -84,13 +84,6 @@ public final class MutableMatrix<T extends SquareMatrix<?>>
   }
 
   @Override
-  public MutableMatrix<T> invert() {
-    mat.invert();
-
-    return this;
-  }
-
-  @Override
   public double det() {
     return mat.det();
   }

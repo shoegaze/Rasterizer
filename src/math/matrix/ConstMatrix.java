@@ -102,15 +102,6 @@ public final class ConstMatrix<T extends SquareMatrix<?>>
   }
 
   @Override
-  public ConstMatrix<T> invert() {
-    @SuppressWarnings("unchecked")
-    T result = (T)mat.copy();
-    result.invert();
-
-    return new ConstMatrix<>(result);
-  }
-
-  @Override
   public double det() {
     return mat.det();
   }
