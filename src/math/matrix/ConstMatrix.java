@@ -102,6 +102,15 @@ public final class ConstMatrix<T extends SquareMatrix<?>>
   }
 
   @Override
+  public ConstMatrix<T> transpose() {
+    @SuppressWarnings("unchecked")
+    T result = (T)mat.copy();
+    result.transpose();
+
+    return new ConstMatrix<>(result);
+  }
+
+  @Override
   public double det() {
     return mat.det();
   }

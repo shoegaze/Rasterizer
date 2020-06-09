@@ -84,6 +84,13 @@ public final class MutableMatrix<T extends SquareMatrix<?>>
   }
 
   @Override
+  public MutableMatrix<T> transpose() {
+    mat.transpose();
+
+    return this;
+  }
+
+  @Override
   public double det() {
     return mat.det();
   }
