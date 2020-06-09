@@ -63,11 +63,6 @@ public class Matrix3_3 extends SquareMatrix<Vector3> {
   }
 
   @Override
-  public void invert() {
-    // TODO: stub
-  }
-
-  @Override
   public SquareMatrix<Vector3> copy() {
     return new Matrix3_3(
       getCol(0),

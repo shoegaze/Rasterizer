@@ -83,11 +83,6 @@ public class Matrix4_4 extends SquareMatrix<Vector4> {
   }
 
   @Override
-  public void invert() {
-    // TODO Auto-generated method stub
-  }
-
-  @Override
   public SquareMatrix<Vector4> copy() {
     return new Matrix4_4(
       getRow(0),

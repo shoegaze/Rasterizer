@@ -52,16 +52,6 @@ public class Matrix2_2 extends SquareMatrix<Vector2> {
   }
 
   @Override
-  public void invert() {
-    double a = getElement(0, 0), b = getElement(0, 1);
-    double c = getElement(1, 0), d = getElement(1, 1);
-    double det = det();
-
-    setElement(0, 0,  d/det); setElement(0, 1, -b/det);
-    setElement(1, 0, -c/det); setElement(1, 1,  a/det);
-  }
-
-  @Override
   public SquareMatrix<Vector2> copy() {
     return new Matrix2_2(
       getCol(0),

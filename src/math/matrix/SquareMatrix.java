@@ -17,9 +17,10 @@ public abstract class SquareMatrix<R extends Vector> {
   public abstract int getSize();
   public abstract R getRow(int i);
   public abstract R getCol(int j);
+  // public abstract void setRow(int i, R row);
+  // public abstract void setCol(int j, R col);
   // TODO: move to MatrixOperators
   public abstract double det();
-  public abstract void invert();
 
   public final boolean equals(SquareMatrix<?> rhs, double epsilon) {
     if (this.getClass() != rhs.getClass()) {
