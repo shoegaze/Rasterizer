@@ -27,6 +27,11 @@ public class ConstVector<T extends Vector>
   }
 
   @Override
+  public boolean equals(ConstVector<T> rhs, double epsilon) {
+    return equals(rhs.vec, epsilon);
+  }
+
+  @Override
   public String toString() {
     return "Const:" + vec.toString();
   }
@@ -50,6 +55,11 @@ public class ConstVector<T extends Vector>
   }
 
   @Override
+  public ConstVector<T> plus(ConstVector<T> rhs) {
+    return plus(rhs.vec);
+  }
+
+  @Override
   public ConstVector<T> minus(T rhs) {
     @SuppressWarnings("unchecked")
     T result = (T)vec.copy();
@@ -60,6 +70,11 @@ public class ConstVector<T extends Vector>
     }
 
     return new ConstVector<>(result);
+  }
+
+  @Override
+  public ConstVector<T> minus(ConstVector<T> rhs) {
+    return minus(rhs.vec);
   }
 
   @Override
@@ -95,6 +110,11 @@ public class ConstVector<T extends Vector>
   }
 
   @Override
+  public double dot(ConstVector<T> rhs) {
+    return dot(rhs.vec);
+  }
+
+  @Override
   public double magnitude_2() {
     return this.dot(vec);
   }
@@ -125,5 +145,10 @@ public class ConstVector<T extends Vector>
     @SuppressWarnings("unchecked")
     T result = (T)new Vector3(x, y, z);
     return new ConstVector<>(result);
+  }
+
+  @Override
+  public ConstVector<T> cross(IVectorModifier<Vector3, ?> rhs) {
+    return cross(rhs);
   }
 }

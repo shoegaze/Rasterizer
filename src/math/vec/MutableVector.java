@@ -26,6 +26,11 @@ public final class MutableVector<T extends Vector>
   }
 
   @Override
+  public boolean equals(MutableVector<T> rhs, double epsilon) {
+    return equals(rhs.vec, epsilon);
+  }
+
+  @Override
   public String toString() {
     return "Mutable:" + vec.toString();
   }
@@ -46,6 +51,12 @@ public final class MutableVector<T extends Vector>
   }
 
   @Override
+  public MutableVector<T> plus(MutableVector<T> rhs) {
+    return plus(rhs.vec);
+  }
+
+
+  @Override
   public MutableVector<T> minus(T rhs) {
     for (int i = 0; i < vec.getSize(); ++i) {
       vec.setElement(
@@ -53,6 +64,11 @@ public final class MutableVector<T extends Vector>
     }
 
     return this;
+  }
+
+  @Override
+  public MutableVector<T> minus(MutableVector<T> rhs) {
+    return minus(rhs.vec);
   }
 
   @Override
@@ -82,6 +98,11 @@ public final class MutableVector<T extends Vector>
     }
 
     return sum;
+  }
+
+  @Override
+  public double dot(MutableVector<T> rhs) {
+    return dot(rhs.vec);
   }
 
   @Override
@@ -116,5 +137,10 @@ public final class MutableVector<T extends Vector>
     lhs.setElement(2, z);
 
     return this;
+  }
+
+  @Override
+  public MutableVector<T> cross(IVectorModifier<Vector3, ?> rhs) {
+    return cross(rhs);
   }
 }

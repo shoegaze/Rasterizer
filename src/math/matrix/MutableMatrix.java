@@ -22,6 +22,16 @@ public final class MutableMatrix<T extends SquareMatrix<?>>
   }
 
   @Override
+  public boolean equals(T rhs, double epsilon) {
+    return mat.equals(rhs, epsilon);
+  }
+
+  @Override
+  public boolean equals(MutableMatrix<T> rhs, double epsilon) {
+    return equals(rhs.mat, epsilon);
+  }
+
+  @Override
   public String toString() {
     return "Mutable:" + mat.toString();
   }
@@ -45,6 +55,11 @@ public final class MutableMatrix<T extends SquareMatrix<?>>
   }
 
   @Override
+  public MutableMatrix<T> plus(MutableMatrix<T> rhs) {
+    return plus(rhs.mat);
+  }
+
+  @Override
   public MutableMatrix<T> minus(T rhs) {
     for (int i = 0; i < mat.getSize(); ++i) {
       for (int j = 0; j < mat.getSize(); ++j) {
@@ -55,6 +70,11 @@ public final class MutableMatrix<T extends SquareMatrix<?>>
     }
 
     return this;
+  }
+
+  @Override
+  public MutableMatrix<T> minus(MutableMatrix<T> rhs) {
+    return minus(rhs.mat);
   }
 
   @Override
@@ -81,6 +101,11 @@ public final class MutableMatrix<T extends SquareMatrix<?>>
       .getMatrix();
 
     return this;
+  }
+
+  @Override
+  public MutableMatrix<T> dot(MutableMatrix<T> rhs) {
+    return dot(rhs.mat);
   }
 
   @Override

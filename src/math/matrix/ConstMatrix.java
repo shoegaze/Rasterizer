@@ -24,6 +24,16 @@ public final class ConstMatrix<T extends SquareMatrix<?>>
   }
 
   @Override
+  public boolean equals(T rhs, double epsilon) {
+    return mat.equals(rhs, epsilon);
+  }
+
+  @Override
+  public boolean equals(ConstMatrix<T> rhs, double epsilon) {
+    return equals(rhs.mat, epsilon);
+  }
+
+  @Override
   public String toString() {
     return "Const:" + mat.toString();
   }
@@ -50,6 +60,11 @@ public final class ConstMatrix<T extends SquareMatrix<?>>
   }
 
   @Override
+  public ConstMatrix<T> plus(ConstMatrix<T> rhs) {
+    return plus(rhs.mat);
+  }
+
+  @Override
   public ConstMatrix<T> minus(T rhs) {
     @SuppressWarnings("unchecked")
     T result = (T)mat.copy();
@@ -63,6 +78,11 @@ public final class ConstMatrix<T extends SquareMatrix<?>>
     }
 
     return new ConstMatrix<>(result);
+  }
+
+  @Override
+  public ConstMatrix<T> minus(ConstMatrix<T> rhs) {
+    return minus(rhs.mat);
   }
 
   @Override
@@ -99,6 +119,11 @@ public final class ConstMatrix<T extends SquareMatrix<?>>
     }
 
     return new ConstMatrix<>(result);
+  }
+
+  @Override
+  public ConstMatrix<T> dot(ConstMatrix<T> rhs) {
+    return dot(rhs.mat);
   }
 
   @Override

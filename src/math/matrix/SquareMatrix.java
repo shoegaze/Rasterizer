@@ -8,8 +8,8 @@ public abstract class SquareMatrix<R extends Vector> {
   private double[] elements;
   private boolean transposed = false;
 
+  // Make sure there are only n^2 elements passed in
   protected SquareMatrix(double ...elements) {
-    // TODO: check if there are n^2 elements in array
     this.elements = elements;
   }
 
@@ -17,9 +17,6 @@ public abstract class SquareMatrix<R extends Vector> {
   public abstract int getSize();
   public abstract R getRow(int i);
   public abstract R getCol(int j);
-  // public abstract void setRow(int i, R row);
-  // public abstract void setCol(int j, R col);
-  // TODO: move to MatrixOperators
   public abstract double det();
 
   public final boolean equals(SquareMatrix<?> rhs, double epsilon) {
@@ -74,18 +71,5 @@ public abstract class SquareMatrix<R extends Vector> {
     return transposed?
       getSize()*i + j :
       getSize()*j + i;
-  }
-
-  @FunctionalInterface
-  protected interface ElementMapper {
-    double map(int i, int j, double value);
-  }
-
-  protected final void mapElements(ElementMapper mapper) {
-    for (int i = 0; i < getSize(); ++i) {
-      for (int j = 0; j < getSize(); ++j) {
-        setElement(i, j, mapper.map(i, j, getElement(i, j)));
-      }
-    }
   }
 }
