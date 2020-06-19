@@ -1,4 +1,4 @@
-package render;
+package render.pixel;
 
 public interface Pixel<N extends Number> {
   int channels();

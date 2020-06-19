@@ -1,4 +1,4 @@
-package render;
+package render.pixel;
 
 public final class PixelGrayscale<N extends Number> implements Pixel<N> {
   N data;

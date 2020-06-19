@@ -1,4 +1,6 @@
-package render;
+package render.texture;
+
+import render.pixel.PixelRGB;
 
 public class TextureRGB<N extends Number> extends Texture<N, PixelRGB<N>> {
   public TextureRGB(Class<N> type, int width, int height) {

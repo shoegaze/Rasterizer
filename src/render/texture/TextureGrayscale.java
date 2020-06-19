@@ -1,4 +1,6 @@
-package render;
+package render.texture;
+
+import render.pixel.PixelGrayscale;
 
 public class TextureGrayscale<N extends Number> extends Texture<N, PixelGrayscale<N>> {
   public TextureGrayscale(Class<N> type, int width, int height) {

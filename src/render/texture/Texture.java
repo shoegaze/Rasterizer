@@ -1,7 +1,8 @@
-package render;
+package render.texture;
 
 import java.util.ArrayList;
 import java.util.List;
+import render.pixel.Pixel;
 
 public abstract class Texture<N extends Number, E extends Pixel<?>> {
   private static <N extends Number> N zero(Class<N> type) {

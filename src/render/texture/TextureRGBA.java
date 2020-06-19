@@ -1,4 +1,6 @@
-package render;
+package render.texture;
+
+import render.pixel.PixelRGBA;
 
 public class TextureRGBA<N extends Number> extends Texture<N, PixelRGBA<N>> {
   public TextureRGBA(Class<N> type, int width, int height) {

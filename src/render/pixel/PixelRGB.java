@@ -1,4 +1,4 @@
-package render;
+package render.pixel;
 
 import java.util.ArrayList;
 import java.util.List;
