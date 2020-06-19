@@ -1,4 +1,4 @@
-package math.vec;
+package math.vector;
 
 public final class Vector3 extends Vector {
   public static final ConstVector<Vector3> ZERO = new ConstVector<>(new Vector3(0, 0, 0));

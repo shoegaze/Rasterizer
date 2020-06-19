@@ -1,4 +1,4 @@
-package math.vec;
+package math.vector;
 
 public interface IVectorOperator<T extends Vector, R extends IVectorModifier<T,?>> {
   boolean equals(T rhs, double epsilon);

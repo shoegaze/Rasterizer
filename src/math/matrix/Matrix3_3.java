@@ -1,6 +1,6 @@
 package math.matrix;
 
-import math.vec.Vector3;
+import math.vector.Vector3;
 
 public class Matrix3_3 extends SquareMatrix<Vector3> {
   public static final ConstMatrix<Matrix3_3> IDENTITY = new ConstMatrix<>(new Matrix3_3(1, 0, 0,
