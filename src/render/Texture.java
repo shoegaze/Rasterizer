@@ -2,7 +2,6 @@ package render;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 public abstract class Texture<N extends Number, E extends Pixel<?>> {
   private static <N extends Number> N zero(Class<N> type) {
@@ -59,34 +58,34 @@ public abstract class Texture<N extends Number, E extends Pixel<?>> {
     return width*height*channels;
   }
 
-  public int width() {
+  public int getWidth() {
     return width;
   }
 
-  public int height() {
+  public int getHeight() {
     return height;
   }
 
-  public int channels() {
+  public int getChannels() {
     return channels;
   }
 
   public E getPixelUV(double u, double v) {
-    return getPixelIndexed((int)u*width, (int)v*height);
+    return getPixelIndexed((int)(u*width), (int)(v*height));
   }
 
   public void setPixelUV(double u, double v, E value) {
-    setPixelIndexed((int)u*width, (int)v*height, value);
+    setPixelIndexed((int)(u*width), (int)(v*height), value);
   }
 
   @FunctionalInterface
-  protected interface TextureMapperIndexed<E> {
+  public interface TextureMapperIndexed<E> {
     E map(int i, int j, E value);
   }
 
   public void mapPixelsIndexed(TextureMapperIndexed<E> mapper) {
-    for (int i = 0; i < width; ++i) {
-      for (int j = 0; j < height; ++j) {
+    for (int j = 0; j < height; ++j) {
+      for (int i = 0; i < width; ++i) {
         E result = mapper.map(i, j, getPixelIndexed(i, j));
         setPixelIndexed(i, j, result);
       }
@@ -94,15 +93,20 @@ public abstract class Texture<N extends Number, E extends Pixel<?>> {
   }
 
   @FunctionalInterface
-  protected interface TextureMapperUV<E> {
+  public interface TextureMapperUV<E> {
     E map(double i, double j, E value);
   }
 
   public void mapPixelsUV(TextureMapperUV<E> mapper) {
-    mapPixelsIndexed((i, j, value) -> mapper.map((double)i/width, (double)j/height, getPixelIndexed(i, j)));
+    final double w_1 = 1.0 / width;
+    final double h_1 = 1.0 / height;
+    mapPixelsIndexed((i, j, value) -> mapper.map(
+      w_1*((double)i + 0.5),
+      h_1*((double)j + 0.5),
+      getPixelIndexed(i, j)));
   }
 
   protected int index2Dto1D(int i, int j) {
-    return channels*(j*width + i);
+    return channels*(i*height + j);
   }
 }

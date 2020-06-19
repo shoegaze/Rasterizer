@@ -17,7 +17,7 @@ public class TextureRGB<N extends Number> extends Texture<N, PixelRGB<N>> {
   @Override
   public void setPixelIndexed(int i, int j, PixelRGB<N> value) {
     final int k = index2Dto1D(i, j);
-    for (int ii = 0; ii < channels(); ++ii) {
+    for (int ii = 0; ii < getChannels(); ++ii) {
       data.set(k+ii, value.get(ii));
     }
   }
