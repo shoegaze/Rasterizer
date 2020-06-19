@@ -1,6 +1,6 @@
 package math.matrix;
 
-public class Translation3D extends Matrix4_4 {
+public class Translation3D extends InvertibleAffineMap3D {
   private double dx;
   private double dy;
   private double dz;
@@ -16,7 +16,7 @@ public class Translation3D extends Matrix4_4 {
     this.dz = dz;
   }
 
-  // public Translation3D invert() {
-  //   return new Translation3D(-dx, -dy, -dz);
-  // }
+  public Translation3D invert() {
+    return new Translation3D(-dx, -dy, -dz);
+  }
 }

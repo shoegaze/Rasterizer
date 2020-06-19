@@ -2,6 +2,7 @@ package math.vec;
 
 import java.util.Arrays;
 
+// TODO: Make elements generic
 public abstract class Vector {
   private double[] elements;
 

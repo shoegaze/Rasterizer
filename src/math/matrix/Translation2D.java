@@ -1,6 +1,6 @@
 package math.matrix;
 
-public class Translation2D extends Matrix3_3 {
+public final class Translation2D extends InvertibleAffineMap2D {
   private double dx;
   private double dy;
 
@@ -13,7 +13,7 @@ public class Translation2D extends Matrix3_3 {
     this.dy = dy;
   }
 
-  // public Translation2D invert() {
-  //   return new Translation2D(-dx, -dy);
-  // }
+  public Translation2D invert() {
+    return new Translation2D(-dx, -dy);
+  }
 }

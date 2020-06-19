@@ -1,6 +1,6 @@
 package math.matrix;
 
-public class Rotation2D extends Matrix3_3 {
+public final class Rotation2D extends Matrix3_3 {
   private double theta;
 
   public Rotation2D(double theta) {
@@ -11,7 +11,7 @@ public class Rotation2D extends Matrix3_3 {
     this.theta = theta;
   }
 
-  // public Rotation2D invert() {
-  //   return new Rotation2D(-theta);
-  // }
+  public Rotation2D invert() {
+    return new Rotation2D(-theta);
+  }
 }

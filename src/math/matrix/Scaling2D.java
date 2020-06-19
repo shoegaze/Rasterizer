@@ -1,6 +1,6 @@
 package math.matrix;
 
-public class Scaling2D extends Matrix3_3 {
+public final class Scaling2D extends InvertibleAffineMap2D {
   private double sx;
   private double sy;
 
@@ -17,7 +17,7 @@ public class Scaling2D extends Matrix3_3 {
     this(s, s);
   }
 
-  // public Scaling2D invert() {
-  //   return new Scaling2D(1/sx, 1/sy);
-  // }
+  public Scaling2D invert() {
+    return new Scaling2D(1/sx, 1/sy);
+  }
 }

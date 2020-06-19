@@ -1,6 +1,6 @@
 package math.matrix;
 
-public class Scaling3D extends Matrix4_4 {
+public class Scaling3D extends InvertibleAffineMap3D {
   private double sx;
   private double sy;
   private double sz;
@@ -20,7 +20,7 @@ public class Scaling3D extends Matrix4_4 {
     this(s, s, s);
   }
 
-  // public Scaling3D invert() {
-  //   return new Scaling3D(1/sx, 1/sy, 1/sz);
-  // }
+  public Scaling3D invert() {
+    return new Scaling3D(1/sx, 1/sy, 1/sz);
+  }
 }
