@@ -1,8 +1,6 @@
-package math.vector.modifier;
+package math.vector;
 
-import math.modifier.IFreeze;
-import math.vector.Vector;
-import math.vector.Vector3;
+import math.IFreeze;
 
 public final class MutableVector<T extends Vector>
   implements IVectorModifier<T, MutableVector<T>>, IFreeze<ConstVector<T>> {

@@ -1,7 +1,7 @@
 package math.matrix.transform;
 
 import math.matrix.SquareMatrix;
-import math.vector.modifier.ConstVector;
+import math.vector.ConstVector;
 import math.vector.Vector;
 
 public abstract class InvertibleMap<T extends SquareMatrix<?>, R extends InvertibleMap<?,?>> {

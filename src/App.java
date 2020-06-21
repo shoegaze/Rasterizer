@@ -1,10 +1,10 @@
-import math.modifier.Const;
+import math.Const;
 import math.matrix.Matrix3_3;
 import math.matrix.Matrix4_4;
 import math.matrix.transform.Scaling2D;
 import math.vector.*;
-import render.color.*;
 import render.texture.*;
+import render.color.*;
 
 public class App {
   public static void main(String[] args) {

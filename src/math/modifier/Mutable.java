@@ -1,8 +1,8 @@
 package math.modifier;
 
-import math.matrix.modifier.MutableMatrix;
+import math.matrix.MutableMatrix;
 import math.matrix.SquareMatrix;
-import math.vector.modifier.MutableVector;
+import math.vector.MutableVector;
 import math.vector.Vector;
 
 public final class Mutable {

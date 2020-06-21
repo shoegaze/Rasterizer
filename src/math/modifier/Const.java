@@ -1,8 +1,8 @@
 package math.modifier;
 
-import math.matrix.modifier.ConstMatrix;
+import math.matrix.ConstMatrix;
 import math.matrix.SquareMatrix;
-import math.vector.modifier.ConstVector;
+import math.vector.ConstVector;
 import math.vector.Vector;
 
 public final class Const {

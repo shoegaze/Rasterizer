@@ -1,6 +1,5 @@
 package math.matrix;
 
-import math.matrix.modifier.ConstMatrix;
 import math.vector.Vector3;
 
 public class Matrix3_3 extends SquareMatrix<Vector3> {

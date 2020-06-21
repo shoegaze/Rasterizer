@@ -1,8 +1,6 @@
-package math.vector.modifier;
+package math.vector;
 
-import math.modifier.IMutate;
-import math.vector.Vector;
-import math.vector.Vector3;
+import math.IMutate;
 
 public class ConstVector<T extends Vector>
   implements IVectorModifier<T, ConstVector<T>>, IMutate<MutableVector<T>> {

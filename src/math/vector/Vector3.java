@@ -1,7 +1,5 @@
 package math.vector;
 
-import math.vector.modifier.ConstVector;
-
 public final class Vector3 extends Vector {
   public static final ConstVector<Vector3> ZERO = new ConstVector<>(new Vector3(0, 0, 0));
   public static final ConstVector<Vector3> ONES = new ConstVector<>(new Vector3(1, 1, 1));

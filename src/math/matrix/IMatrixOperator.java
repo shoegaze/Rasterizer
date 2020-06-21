@@ -1,7 +1,5 @@
 package math.matrix;
 
-import math.matrix.modifier.IMatrixModifier;
-
 public interface IMatrixOperator<T extends SquareMatrix<?>, R extends IMatrixModifier<T,?>> {
   boolean equals(T rhs, double epsilon);
   boolean equals(R rhs, double epsilon);
