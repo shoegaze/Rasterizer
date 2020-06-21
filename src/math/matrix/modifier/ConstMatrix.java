@@ -1,6 +1,6 @@
 package math.matrix;
 
-import math.IMutate;
+import math.modifier.IMutate;
 import math.vector.Vector;
 import math.vector.ConstVector;
 

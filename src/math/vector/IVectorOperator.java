@@ -1,5 +1,8 @@
 package math.vector;
 
+import math.vector.modifier.IVectorModifier;
+import math.vector.modifier.NormalVector;
+
 public interface IVectorOperator<T extends Vector, R extends IVectorModifier<T,?>> {
   boolean equals(T rhs, double epsilon);
   boolean equals(R rhs, double epsilon);
