@@ -1,4 +1,4 @@
-package render.pixel;
+package render.color;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,6 +7,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface PixelChannels {
+public @interface ColorChannels {
   int value();
 }

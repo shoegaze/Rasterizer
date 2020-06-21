@@ -1,12 +1,12 @@
-package render.pixel;
+package render.color;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public final class PixelRGB<E extends Number> implements Pixel<E> {
+public final class ColorRGB<E extends Number> implements IColor<E> {
   private final List<E> data;
 
-  public PixelRGB(E r, E g, E b) {
+  public ColorRGB(E r, E g, E b) {
     this.data = new ArrayList<>(3);
     data.add(r);
     data.add(g);
@@ -26,8 +26,8 @@ public final class PixelRGB<E extends Number> implements Pixel<E> {
   }
 
   @Override
-  public PixelRGB<E> copy() {
-    return new PixelRGB<>(r(), g(), b());
+  public ColorRGB<E> copy() {
+    return new ColorRGB<>(r(), g(), b());
   }
 
   @Override

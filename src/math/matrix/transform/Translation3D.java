@@ -1,6 +1,6 @@
-package math.matrix;
+package math.matrix.transform;
 
-public class Translation3D extends InvertibleAffineMap3D {
+public class Translation3D extends InvertibleMap3D {
   private double dx;
   private double dy;
   private double dz;

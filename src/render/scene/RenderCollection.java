@@ -8,4 +8,8 @@ import java.util.Set;
 public class RenderCollection extends RenderObject {
   private List<RenderObject> objects = new ArrayList<>();
   private Set<String> ids = new HashSet<>();
+
+  public RenderCollection(String id, RenderObject parent) {
+    super(id, parent);
+  }
 }

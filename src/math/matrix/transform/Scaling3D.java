@@ -1,6 +1,6 @@
-package math.matrix;
+package math.matrix.transform;
 
-public class Scaling3D extends InvertibleAffineMap3D {
+public class Scaling3D extends InvertibleMap3D {
   private double sx;
   private double sy;
   private double sz;

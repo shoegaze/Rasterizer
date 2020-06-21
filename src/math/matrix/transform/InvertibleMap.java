@@ -1,12 +1,13 @@
-package math.matrix;
+package math.matrix.transform;
 
+import math.matrix.SquareMatrix;
 import math.vector.ConstVector;
 import math.vector.Vector;
 
-public abstract class InvertibleAffineMap<T extends SquareMatrix<?>, R extends InvertibleAffineMap<?,?>> {
+public abstract class InvertibleMap<T extends SquareMatrix<?>, R extends InvertibleMap<?,?>> {
   private T mat;
 
-  protected InvertibleAffineMap(T src) {
+  protected InvertibleMap(T src) {
     mat = src;
   }
 

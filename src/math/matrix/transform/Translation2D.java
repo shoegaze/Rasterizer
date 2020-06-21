@@ -1,6 +1,6 @@
-package math.matrix;
+package math.matrix.transform;
 
-public final class Translation2D extends InvertibleAffineMap2D {
+public final class Translation2D extends InvertibleMap2D {
   private double dx;
   private double dy;
 

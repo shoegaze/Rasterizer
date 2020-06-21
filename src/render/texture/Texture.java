@@ -1,10 +1,11 @@
 package render.texture;
 
+import render.color.IColor;
+
 import java.util.ArrayList;
 import java.util.List;
-import render.pixel.Pixel;
 
-public abstract class Texture<N extends Number, E extends Pixel<?>> {
+public abstract class Texture<N extends Number, E extends IColor<?>> {
   private static <N extends Number> N zero(Class<N> type) {
     if (Float.class.equals(type)) {
       return type.cast(0f);
@@ -59,24 +60,24 @@ public abstract class Texture<N extends Number, E extends Pixel<?>> {
     return width*height*channels;
   }
 
-  public int getWidth() {
+  public int width() {
     return width;
   }
 
-  public int getHeight() {
+  public int height() {
     return height;
   }
 
-  public int getChannels() {
+  public int channels() {
     return channels;
   }
 
   public E getPixelUV(double u, double v) {
-    return getPixelIndexed((int)(u*width), (int)(v*height));
+    return getPixelIndexed((int)u*width, (int)v*height);
   }
 
   public void setPixelUV(double u, double v, E value) {
-    setPixelIndexed((int)(u*width), (int)(v*height), value);
+    setPixelIndexed((int)u*width, (int)v*height, value);
   }
 
   @FunctionalInterface
@@ -85,8 +86,8 @@ public abstract class Texture<N extends Number, E extends Pixel<?>> {
   }
 
   public void mapPixelsIndexed(TextureMapperIndexed<E> mapper) {
-    for (int j = 0; j < height; ++j) {
-      for (int i = 0; i < width; ++i) {
+    for (int i = 0; i < width; ++i) {
+      for (int j = 0; j < height; ++j) {
         E result = mapper.map(i, j, getPixelIndexed(i, j));
         setPixelIndexed(i, j, result);
       }
@@ -99,19 +100,10 @@ public abstract class Texture<N extends Number, E extends Pixel<?>> {
   }
 
   public void mapPixelsUV(TextureMapperUV<E> mapper) {
-    final double w_1 = 1.0 / width;
-    final double h_1 = 1.0 / height;
-    mapPixelsIndexed((i, j, value) -> mapper.map(
-      w_1*((double)i + 0.5),
-      h_1*((double)j + 0.5),
-      getPixelIndexed(i, j)));
-  }
-
-  public void blit(Texture<N, E> dest, TextureRegion from, TextureRegion to) {
-    throw new UnsupportedOperationException();
+    mapPixelsIndexed((i, j, value) -> mapper.map((double)i/width, (double)j/height, getPixelIndexed(i, j)));
   }
 
   protected int index2Dto1D(int i, int j) {
-    return channels*(i*height + j);
+    return channels*(j*width + i);
   }
 }

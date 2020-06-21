@@ -1,9 +1,9 @@
-package render.pixel;
+package render.color;
 
-public final class PixelGrayscale<N extends Number> implements Pixel<N> {
+public final class ColorGray<N extends Number> implements IColor<N> {
   N data;
 
-  public PixelGrayscale(N value) {
+  public ColorGray(N value) {
     this.data = value;
   }
 
@@ -18,8 +18,8 @@ public final class PixelGrayscale<N extends Number> implements Pixel<N> {
   }
 
   @Override
-  public PixelGrayscale<N> copy() {
-    return new PixelGrayscale<>(k());
+  public ColorGray<N> copy() {
+    return new ColorGray<>(k());
   }
 
   @Override
