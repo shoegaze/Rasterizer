@@ -107,6 +107,10 @@ public abstract class Texture<N extends Number, E extends Pixel<?>> {
       getPixelIndexed(i, j)));
   }
 
+  public void blit(Texture<N, E> dest, TextureRegion from, TextureRegion to) {
+    throw new UnsupportedOperationException();
+  }
+
   protected int index2Dto1D(int i, int j) {
     return channels*(i*height + j);
   }

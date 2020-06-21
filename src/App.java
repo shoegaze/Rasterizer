@@ -2,7 +2,7 @@ import math.Const;
 import math.matrix.Matrix3_3;
 import math.matrix.Matrix4_4;
 import math.matrix.Scaling2D;
-import math.vec.*;
+import math.vector.*;
 import render.*;
 
 public class App {
@@ -61,5 +61,11 @@ public class App {
 
     System.out.println(texbw.getPixelIndexed(0, 0));
     System.out.println(texbw.getPixelIndexed(1, 0));
+
+    texbw.mapPixelsUV((u, v, value) -> new PixelGrayscale<Float>((float)(u)));
+    texbw.mapPixelsIndexed((i, j, value) -> {
+      System.out.println("(" + i + ", " + j + "): " + value.toString());
+      return value;
+    });
   }
 }
