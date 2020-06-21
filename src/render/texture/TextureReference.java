@@ -1,8 +1,8 @@
 package render.texture;
 
-import render.pixel.Pixel;
+import render.color.IColor;
 
-public class TextureReference<N extends Number, E extends Pixel<N>> {
+public class TextureReference<N extends Number, E extends IColor<N>> {
   final Class<N> type;
   final Texture<N, E> target;
   final TextureRegion region;
@@ -14,7 +14,7 @@ public class TextureReference<N extends Number, E extends Pixel<N>> {
   }
 
   public TextureReference(Class<N> type, Texture<N, E> target) {
-    this(type, target, new TextureRegion(0, 0, target.getWidth(), target.getHeight()));
+    this(type, target, new TextureRegion(0, 0, target.width(), target.height()));
   }
 
   public E getPixelIndexed(int i, int j) {

@@ -1,6 +1,6 @@
-package math.matrix;
+package math.matrix.transform;
 
-public final class Scaling2D extends InvertibleAffineMap2D {
+public final class Scaling2D extends InvertibleMap2D {
   private double sx;
   private double sy;
 

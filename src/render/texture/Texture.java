@@ -81,7 +81,7 @@ public abstract class Texture<N extends Number, E extends IColor<?>> {
   }
 
   @FunctionalInterface
-  protected interface TextureMapperIndexed<E> {
+  public interface TextureMapperIndexed<E> {
     E map(int i, int j, E value);
   }
 
@@ -95,7 +95,7 @@ public abstract class Texture<N extends Number, E extends IColor<?>> {
   }
 
   @FunctionalInterface
-  protected interface TextureMapperUV<E> {
+  public interface TextureMapperUV<E> {
     E map(double i, double j, E value);
   }
 

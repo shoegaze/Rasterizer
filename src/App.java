@@ -1,9 +1,10 @@
 import math.Const;
 import math.matrix.Matrix3_3;
 import math.matrix.Matrix4_4;
-import math.matrix.Scaling2D;
+import math.matrix.transform.Scaling2D;
 import math.vector.*;
-import render.*;
+import render.texture.*;
+import render.color.*;
 
 public class App {
   public static void main(String[] args) {
@@ -46,10 +47,10 @@ public class App {
       s.dot(new Vector3(1, 1, 1)));
 
     TextureRGB<Byte> tex = new TextureRGB<>(Byte.class, 2, 3);
-    tex.setPixelIndexed(0, 0, new PixelRGB<>((byte)0xff, (byte)0x00, (byte)0x00));
-    tex.setPixelIndexed(1, 0, new PixelRGB<>((byte)0x00, (byte)0xff, (byte)0x00));
-    tex.setPixelIndexed(0, 1, new PixelRGB<>((byte)0x00, (byte)0x00, (byte)0xff));
-    tex.setPixelIndexed(1, 1, new PixelRGB<>((byte)0xff, (byte)0xff, (byte)0xff));
+    tex.setPixelIndexed(0, 0, new ColorRGB<>((byte)0xff, (byte)0x00, (byte)0x00));
+    tex.setPixelIndexed(1, 0, new ColorRGB<>((byte)0x00, (byte)0xff, (byte)0x00));
+    tex.setPixelIndexed(0, 1, new ColorRGB<>((byte)0x00, (byte)0x00, (byte)0xff));
+    tex.setPixelIndexed(1, 1, new ColorRGB<>((byte)0xff, (byte)0xff, (byte)0xff));
 
     System.out.println(tex.getPixelIndexed(0, 0));
     System.out.println(tex.getPixelIndexed(1, 0));
@@ -57,12 +58,12 @@ public class App {
     System.out.println(tex.getPixelIndexed(1, 1));
 
     TextureGrayscale<Float> texbw = new TextureGrayscale<>(Float.class, 10, 10);
-    texbw.setPixelIndexed(0, 0, new PixelGrayscale<>(50000.0f));
+    texbw.setPixelIndexed(0, 0, new ColorGray<>(50000.0f));
 
     System.out.println(texbw.getPixelIndexed(0, 0));
     System.out.println(texbw.getPixelIndexed(1, 0));
 
-    texbw.mapPixelsUV((u, v, value) -> new PixelGrayscale<Float>((float)(u)));
+    texbw.mapPixelsUV((u, v, value) -> new ColorGray<>((float)(u)));
     texbw.mapPixelsIndexed((i, j, value) -> {
       System.out.println("(" + i + ", " + j + "): " + value.toString());
       return value;

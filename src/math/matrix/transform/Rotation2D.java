@@ -1,4 +1,6 @@
-package math.matrix;
+package math.matrix.transform;
+
+import math.matrix.Matrix3_3;
 
 public final class Rotation2D extends Matrix3_3 {
   private double theta;

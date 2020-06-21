@@ -2,8 +2,8 @@ package math.modifier;
 
 import math.matrix.MutableMatrix;
 import math.matrix.SquareMatrix;
-import math.vec.MutableVector;
-import math.vec.Vector;
+import math.vector.MutableVector;
+import math.vector.Vector;
 
 public final class Mutable {
   public static <V extends Vector> MutableVector<V> of(V vec) {

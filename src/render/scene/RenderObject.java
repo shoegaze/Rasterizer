@@ -1,6 +1,6 @@
 package render.scene;
 
-import math.matrix.Transform3D;
+import math.matrix.transform.Transform3D;
 
 public class RenderObject {
   private Class<? extends RenderObject> type;
