@@ -1,4 +1,6 @@
-package math.vector;
+package math.vector.modifier;
+
+import math.vector.Vector;
 
 public final class NormalVector<T extends Vector> extends ConstVector<T> {
   public static <T extends Vector> NormalVector<T> from(T src) {

@@ -1,7 +1,7 @@
-import math.Const;
 import math.matrix.Matrix3_3;
 import math.matrix.Matrix4_4;
 import math.matrix.transform.Scaling2D;
+import math.modifier.*;
 import math.vector.*;
 import render.texture.*;
 import render.color.*;
