@@ -1,7 +1,7 @@
 package math.matrix;
 
 import java.util.Arrays;
-import math.vec.Vector;
+import math.vector.Vector;
 
 // Column-major square matrix
 public abstract class SquareMatrix<R extends Vector> {

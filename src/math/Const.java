@@ -2,8 +2,8 @@ package math;
 
 import math.matrix.ConstMatrix;
 import math.matrix.SquareMatrix;
-import math.vec.ConstVector;
-import math.vec.Vector;
+import math.vector.ConstVector;
+import math.vector.Vector;
 
 public final class Const {
   public static <V extends Vector> ConstVector<V> of(V vec) {

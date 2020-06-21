@@ -1,7 +1,7 @@
 package math.matrix;
 
-import math.vec.ConstVector;
-import math.vec.Vector;
+import math.vector.ConstVector;
+import math.vector.Vector;
 
 public abstract class InvertibleAffineMap<T extends SquareMatrix<?>, R extends InvertibleAffineMap<?,?>> {
   private T mat;

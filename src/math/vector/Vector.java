@@ -1,4 +1,4 @@
-package math.vec;
+package math.vector;
 
 import java.util.Arrays;
 
