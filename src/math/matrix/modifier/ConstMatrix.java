@@ -1,8 +1,9 @@
-package math.matrix;
+package math.matrix.modifier;
 
-import math.IMutate;
+import math.matrix.SquareMatrix;
+import math.modifier.IMutate;
 import math.vector.Vector;
-import math.vector.ConstVector;
+import math.vector.modifier.ConstVector;
 
 public final class ConstMatrix<T extends SquareMatrix<?>>
   implements IMatrixModifier<T, ConstMatrix<T>>, IMutate<MutableMatrix<T>> {

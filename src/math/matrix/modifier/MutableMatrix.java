@@ -1,6 +1,7 @@
-package math.matrix;
+package math.matrix.modifier;
 
-import math.IFreeze;
+import math.matrix.SquareMatrix;
+import math.modifier.IFreeze;
 
 public final class MutableMatrix<T extends SquareMatrix<?>>
   implements IMatrixModifier<T, MutableMatrix<T>>, IFreeze<ConstMatrix<T>> {
