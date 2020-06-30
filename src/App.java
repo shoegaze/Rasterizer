@@ -1,72 +1,58 @@
-import math.matrix.Matrix3_3;
-import math.matrix.Matrix4_4;
-import math.matrix.transform.Scaling2D;
-import math.modifier.*;
-import math.vector.*;
 import render.texture.*;
-import render.color.*;
 
 public class App {
   public static void main(String[] args) {
-    System.out.println(
-      Vector3.ZERO
-        .plus(new Vector3(1, 2, 3))
-        .negate()
-        .normalized()
-        .negate());
+//    System.out.println(
+//      Vector3.ZERO
+//        .plus(new Vector3(1, 2, 3))
+//        .negate()
+//        .normalized()
+//        .negate());
+//
+//    System.out.println(
+//      Vector2.RIGHT
+//        .dot(Vector2.UP));
+//
+//    System.out.println(
+//      new Matrix4_4(1,  5,  8, 10,
+//                    11, 2,  6,  9,
+//                    14, 12, 3,  7,
+//                    16, 15, 13, 4).det());
+//
+//
+//    System.out.println(
+//      Matrix3_3.IDENTITY.dot(
+//        new Matrix3_3(1, 2, 3,
+//                      4, 5, 6,
+//                      7, 8, 9)));
+//
+//    System.out.println(
+//      Const.of(
+//        new Matrix3_3(1, 4, 7,
+//                      2, 5, 8,
+//                      3, 6, 9))
+//      .dot(
+//        new Matrix3_3(1,  1,  2,
+//                      3,  5,  8,
+//                      13, 21, 34)));
+//
+//    Scaling2D s = new Scaling2D(2, -1);
+//    System.out.println(
+//      s.dot(new Vector3(1, 1, 1)));
 
-    System.out.println(
-      Vector2.RIGHT
-        .dot(Vector2.UP));
+//    System.out.println(new Color(0.5, 0, 1).getInt(0));
+//      System.out.println(new Color((byte)Byte.MAX_VALUE, (byte)0, (byte)Byte.MIN_VALUE));
 
-    System.out.println(
-      new Matrix4_4(1,  5,  8, 10,
-                    11, 2,  6,  9,
-                    14, 12, 3,  7,
-                    16, 15, 13, 4).det());
+//    Texture tex = new Texture(TextureType.INT, 2, 2, 3);
+//    tex.map((double u, double v, Color color) ->
+//        new Color((int)(Integer.MAX_VALUE*u), (int)(Integer.MIN_VALUE), (int)(Integer.MAX_VALUE*v)));
+//    tex.foreach((double u, double v, Color color) ->
+//        System.out.println("("+u+", "+v+"): " + color));
 
-
-    System.out.println(
-      Matrix3_3.IDENTITY.dot(
-        new Matrix3_3(1, 2, 3,
-                      4, 5, 6,
-                      7, 8, 9)));
-
-    System.out.println(
-      Const.of(
-        new Matrix3_3(1, 4, 7,
-                      2, 5, 8,
-                      3, 6, 9))
-      .dot(
-        new Matrix3_3(1,  1,  2,
-                      3,  5,  8,
-                      13, 21, 34)));
-
-    Scaling2D s = new Scaling2D(2, -1);
-    System.out.println(
-      s.dot(new Vector3(1, 1, 1)));
-
-    TextureRGB<Byte> tex = new TextureRGB<>(Byte.class, 2, 3);
-    tex.setPixelIndexed(0, 0, new ColorRGB<>((byte)0xff, (byte)0x00, (byte)0x00));
-    tex.setPixelIndexed(1, 0, new ColorRGB<>((byte)0x00, (byte)0xff, (byte)0x00));
-    tex.setPixelIndexed(0, 1, new ColorRGB<>((byte)0x00, (byte)0x00, (byte)0xff));
-    tex.setPixelIndexed(1, 1, new ColorRGB<>((byte)0xff, (byte)0xff, (byte)0xff));
-
-    System.out.println(tex.getPixelIndexed(0, 0));
-    System.out.println(tex.getPixelIndexed(1, 0));
-    System.out.println(tex.getPixelIndexed(0, 1));
-    System.out.println(tex.getPixelIndexed(1, 1));
-
-    TextureGrayscale<Float> texbw = new TextureGrayscale<>(Float.class, 10, 10);
-    texbw.setPixelIndexed(0, 0, new ColorGray<>(50000.0f));
-
-    System.out.println(texbw.getPixelIndexed(0, 0));
-    System.out.println(texbw.getPixelIndexed(1, 0));
-
-    texbw.mapPixelsUV((u, v, value) -> new ColorGray<>((float)(u)));
-    texbw.mapPixelsIndexed((i, j, value) -> {
-      System.out.println("(" + i + ", " + j + "): " + value.toString());
-      return value;
+    Texture texbw = new Texture(TextureType.FLOAT, 40, 40, 3);
+    texbw.map((double u, double v, Color color) -> new Color(u, 0, v));
+    texbw.foreach((int x, int y, Color color) -> {
+      System.out.println("(" + x + ", " + y + "): " + color);
     });
   }
 }
