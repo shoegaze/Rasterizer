@@ -76,6 +76,11 @@ public class Color {
     return get(3);
   }
 
+  public double luminance() {
+    // https://www.itu.int/rec/R-REC-BT.601
+    return 0.299*r() + 0.587*g() + 0.114*b();
+  }
+
   public java.awt.Color toAwtColor() {
     return new java.awt.Color((float)r(), (float)g(), (float)b(), (float)a());
   }

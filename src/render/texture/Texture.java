@@ -1,7 +1,6 @@
 package render.texture;
 
 import java.nio.ByteBuffer;
-import java.util.function.Function;
 
 public class Texture {
   @FunctionalInterface
@@ -120,14 +119,12 @@ public class Texture {
   }
 
   public void map(TextureMapIndexed mapper) {
-    foreach((int x, int y, Color color) -> {
-      setColor(x, y, mapper.map(x, y, color));
-    });
+    foreach((int x, int y, Color color) ->
+        setColor(x, y, mapper.map(x, y, color)));
   }
 
   public void map(TextureMapUv mapper) {
-    foreach((double u, double v, Color color) -> {
-      setColor(u, v, mapper.map(u, v, color));
-    });
+    foreach((double u, double v, Color color) ->
+        setColor(u, v, mapper.map(u, v, color)));
   }
 }

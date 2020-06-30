@@ -1,58 +1,50 @@
+import math.modifier.Const;
+import math.modifier.Mutable;
+import math.vector.Vector2;
+import math.vector.modifier.MutableVector;
 import render.texture.*;
 
 public class App {
   public static void main(String[] args) {
-//    System.out.println(
-//      Vector3.ZERO
-//        .plus(new Vector3(1, 2, 3))
-//        .negate()
-//        .normalized()
-//        .negate());
-//
-//    System.out.println(
-//      Vector2.RIGHT
-//        .dot(Vector2.UP));
-//
-//    System.out.println(
-//      new Matrix4_4(1,  5,  8, 10,
-//                    11, 2,  6,  9,
-//                    14, 12, 3,  7,
-//                    16, 15, 13, 4).det());
-//
-//
-//    System.out.println(
-//      Matrix3_3.IDENTITY.dot(
-//        new Matrix3_3(1, 2, 3,
-//                      4, 5, 6,
-//                      7, 8, 9)));
-//
-//    System.out.println(
-//      Const.of(
-//        new Matrix3_3(1, 4, 7,
-//                      2, 5, 8,
-//                      3, 6, 9))
-//      .dot(
-//        new Matrix3_3(1,  1,  2,
-//                      3,  5,  8,
-//                      13, 21, 34)));
-//
-//    Scaling2D s = new Scaling2D(2, -1);
-//    System.out.println(
-//      s.dot(new Vector3(1, 1, 1)));
+    Texture texture = new Texture(TextureType.FLOAT, 40, 40, 3);
+    texture.map((double u, double v, Color color) -> {
+      MutableVector<Vector2> p = Mutable.of(new Vector2(u, v))
+          .minus(new Vector2(0.5, 0.5));
 
-//    System.out.println(new Color(0.5, 0, 1).getInt(0));
-//      System.out.println(new Color((byte)Byte.MAX_VALUE, (byte)0, (byte)Byte.MIN_VALUE));
-
-//    Texture tex = new Texture(TextureType.INT, 2, 2, 3);
-//    tex.map((double u, double v, Color color) ->
-//        new Color((int)(Integer.MAX_VALUE*u), (int)(Integer.MIN_VALUE), (int)(Integer.MAX_VALUE*v)));
-//    tex.foreach((double u, double v, Color color) ->
-//        System.out.println("("+u+", "+v+"): " + color));
-
-    Texture texbw = new Texture(TextureType.FLOAT, 40, 40, 3);
-    texbw.map((double u, double v, Color color) -> new Color(u, 0, v));
-    texbw.foreach((int x, int y, Color color) -> {
-      System.out.println("(" + x + ", " + y + "): " + color);
+      return (p.magnitude() < 0.25) ?
+          new Color(1.0) : new Color(0.0);
     });
+
+    printTexture(texture);
+  }
+
+  private static void printTexture(Texture texture) {
+    StringBuilder s = new StringBuilder(texture.height() * (texture.width()+1));
+
+    for (int y = texture.height()-1; y >= 0; --y) {
+      for (int x = 0; x < texture.width(); ++x) {
+        Color c = texture.getColor(x, y);
+        double l = c.luminance();
+
+        s.append(switch ((int)(l * 10)) {
+          case 0 -> ' ';
+          case 1 -> '.';
+          case 2 -> '_';
+          case 3 -> '-';
+          case 4 -> '=';
+          case 5 -> '+';
+          case 6 -> 'o';
+          case 7 -> 'X';
+          case 8 -> '#';
+          case 9 -> '@';
+          case 10 -> '%';
+          default -> '?';
+        });
+      }
+
+      s.append('\n');
+    }
+
+    System.out.print(s);
   }
 }
