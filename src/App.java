@@ -1,50 +1,34 @@
 import math.modifier.Const;
 import math.modifier.Mutable;
 import math.vector.Vector2;
+import math.vector.Vector3;
+import math.vector.modifier.ConstVector;
 import math.vector.modifier.MutableVector;
+import render.RenderUtilities;
 import render.texture.*;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
 
 public class App {
   public static void main(String[] args) {
     Texture texture = new Texture(TextureType.FLOAT, 40, 40, 3);
-    texture.map((double u, double v, Color color) -> {
-      MutableVector<Vector2> p = Mutable.of(new Vector2(u, v))
-          .minus(new Vector2(0.5, 0.5));
+    ConstVector<Vector3> eye = Vector3.FORWARD.times(5);
 
-      return (p.magnitude() < 0.25) ?
-          new Color(1.0) : new Color(0.0);
+    texture.map((double u, double v, Color color) -> {
+      double r = Mutable.of(new Vector2(u, v))
+          .minus(new Vector2(0.5, 0.5))
+          .magnitude();
+
+      double intensity = (r < 0.25)? 1.0 : 0.0;
+
+      return new Color(intensity);
     });
 
-    printTexture(texture);
-  }
-
-  private static void printTexture(Texture texture) {
-    StringBuilder s = new StringBuilder(texture.height() * (texture.width()+1));
-
-    for (int y = texture.height()-1; y >= 0; --y) {
-      for (int x = 0; x < texture.width(); ++x) {
-        Color c = texture.getColor(x, y);
-        double l = c.luminance();
-
-        s.append(switch ((int)(l * 10)) {
-          case 0 -> ' ';
-          case 1 -> '.';
-          case 2 -> '_';
-          case 3 -> '-';
-          case 4 -> '=';
-          case 5 -> '+';
-          case 6 -> 'o';
-          case 7 -> 'X';
-          case 8 -> '#';
-          case 9 -> '@';
-          case 10 -> '%';
-          default -> '?';
-        });
-      }
-
-      s.append('\n');
-    }
-
-    System.out.print(s);
+    RenderUtilities.writeBmp(texture, "C:/Users/bighead/Desktop/test.bmp");
+//    RenderUtilities.printTexture(texture);
   }
 }
