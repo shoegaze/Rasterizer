@@ -1,34 +1,63 @@
 import math.modifier.Const;
 import math.modifier.Mutable;
-import math.vector.Vector2;
 import math.vector.Vector3;
 import math.vector.modifier.ConstVector;
-import math.vector.modifier.MutableVector;
+import math.vector.modifier.NormalVector;
 import render.RenderUtilities;
 import render.texture.*;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URI;
 
 public class App {
   public static void main(String[] args) {
-    Texture texture = new Texture(TextureType.FLOAT, 40, 40, 3);
-    ConstVector<Vector3> eye = Vector3.FORWARD.times(5);
+    Texture texture = new Texture(TextureType.FLOAT, 400, 400, 3);
+
+    // Camera
+    ConstVector<Vector3> eye = Vector3.BACKWARD.times(5);
+    double near = 0.1;
+    double fov = 80;
+    // Light
+    ConstVector<Vector3> lo = Const.of(new Vector3(4, 4, 4));
+    double lPower = 300;
+    // Sphere
+    ConstVector<Vector3> co = Vector3.ZERO;
+    double cr = 2;
 
     texture.map((double u, double v, Color color) -> {
-      double r = Mutable.of(new Vector2(u, v))
-          .minus(new Vector2(0.5, 0.5))
-          .magnitude();
+      // UV to world position
+      NormalVector<Vector3> dir = eye
+          .plus(Vector3.FORWARD.times(near))
+          .plus(
+              // HACK
+              Mutable.of(new Vector3(-(u-0.5), v-0.5, 0))
+                  .divide(near)
+                  .getVec())
+          .normalized();
 
-      double intensity = (r < 0.25)? 1.0 : 0.0;
+      // Ray-Sphere intersection test
+      ConstVector<Vector3> delta = eye.minus(co);
+      double b = 2*dir.dot(delta);
+      double c = delta.magnitude_2() - cr*cr;
+      double D = b*b - 4*c;
+
+      if (D < 0) {
+        return new Color(0.0);
+      }
+
+      double t = Math.min(
+          2*c / (-b - Math.sqrt(D)),
+          2*c / (-b + Math.sqrt(D)));
+
+      // Light calculation
+      ConstVector<Vector3> p = eye.plus(dir.times(t));
+      ConstVector<Vector3> l = lo.minus(p);
+      NormalVector<Vector3> n = p.minus(co).normalized();
+
+      double r_2 = l.magnitude_2();
+      double intensity = lPower * l.normalized().dot(n) / (4*Math.PI * r_2);
 
       return new Color(intensity);
     });
 
-    RenderUtilities.writeBmp(texture, "C:/Users/bighead/Desktop/test.bmp");
-//    RenderUtilities.printTexture(texture);
+    String path = new java.io.File("./").getAbsolutePath().concat("/sphere.bmp");
+    RenderUtilities.writeBmp(texture, path);
   }
 }

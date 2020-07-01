@@ -14,6 +14,31 @@ public class Color {
     return (double)(value + Byte.MAX_VALUE+1) / 255;
   }
 
+  public static Color from(byte r, byte g, byte b, byte a) {
+    return new Color(normalize(r), normalize(g), normalize(b), normalize(a));
+  }
+
+  public static Color from(int r, int g, int b, int a) {
+    return new Color(normalize(r), normalize(g), normalize(b), normalize(a));
+  }
+
+  public static Color from(int r, int g, int b) {
+    return new Color(r, g, b, Integer.MAX_VALUE);
+  }
+
+  public static Color from(byte r, byte g, byte b) {
+    return new Color(r, g, b, Byte.MAX_VALUE);
+  }
+
+  public static Color from(int y) {
+    return new Color(normalize(y));
+  }
+
+  public static Color from(byte y) {
+    return new Color(normalize(y));
+  }
+
+
   private final double[] values = new double[4];
 
   public Color(double r, double g, double b, double a) {
@@ -23,36 +48,12 @@ public class Color {
     values[3] = normalize(a);
   }
 
-  public Color(int r, int g, int b, int a) {
-    this(normalize(r), normalize(g), normalize(b), normalize(a));
-  }
-
-  public Color(byte r, byte g, byte b, byte a) {
-    this(normalize(r), normalize(g), normalize(b), normalize(a));
-  }
-
   public Color(double r, double g, double b) {
     this(r, g, b, 1.0);
   }
 
-  public Color(int r, int g, int b) {
-    this(r, g, b, Integer.MAX_VALUE);
-  }
-
-  public Color(byte r, byte g, byte b) {
-    this(r, g, b, Byte.MAX_VALUE);
-  }
-
   public Color(double y) {
     this(y, y, y);
-  }
-
-  public Color(int y) {
-    this(normalize(y));
-  }
-
-  public Color(byte y) {
-    this(normalize(y));
   }
 
   @Override
