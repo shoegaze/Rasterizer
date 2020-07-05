@@ -1,7 +1,8 @@
 package render.texture;
 
-// TODO: Inherit Vector4
-public class Color {
+import math.vector.Vector4;
+
+public class Color extends Vector4 {
   private static double normalize(double value) {
     return Math.max(Math.min(value, 1), 0);
   }
@@ -40,13 +41,12 @@ public class Color {
   }
 
 
-  private final double[] values = new double[4];
-
   public Color(double r, double g, double b, double a) {
-    values[0] = normalize(r);
-    values[1] = normalize(g);
-    values[2] = normalize(b);
-    values[3] = normalize(a);
+    super(
+        normalize(r),
+        normalize(g),
+        normalize(b),
+        normalize(a));
   }
 
   public Color(double r, double g, double b) {
@@ -63,19 +63,19 @@ public class Color {
   }
 
   public double r() {
-    return get(0);
+    return x();
   }
 
   public double g() {
-    return get(1);
+    return y();
   }
 
   public double b() {
-    return get(2);
+    return z();
   }
 
   public double a() {
-    return get(3);
+    return w();
   }
 
   public double luminance() {
@@ -83,12 +83,13 @@ public class Color {
     return 0.299*r() + 0.587*g() + 0.114*b();
   }
 
+  // TODO: Make static
   public java.awt.Color toAwtColor() {
     return new java.awt.Color((float)r(), (float)g(), (float)b(), (float)a());
   }
 
   public double get(int i) {
-    return values[i];
+    return getElement(i);
   }
 
   public byte getByte(int i) {
@@ -104,7 +105,7 @@ public class Color {
   }
 
   public void set(int i, double value) {
-    values[i] = normalize(value);
+    setElement(i, normalize(value));
   }
 
   public void set(int i, float value) {
