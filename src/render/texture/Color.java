@@ -2,7 +2,7 @@ package render.texture;
 
 import math.vector.Vector4;
 
-public class Color extends Vector4 {
+public final class Color extends Vector4 {
   private static double normalize(double value) {
     return Math.max(Math.min(value, 1), 0);
   }
@@ -40,6 +40,13 @@ public class Color extends Vector4 {
     return new Color(normalize(y));
   }
 
+  public static java.awt.Color toAwt(Color color) {
+      return new java.awt.Color(
+          (float)color.r(),
+          (float)color.g(),
+          (float)color.b(),
+          (float)color.a());
+  }
 
   public Color(double r, double g, double b, double a) {
     super(
@@ -81,11 +88,6 @@ public class Color extends Vector4 {
   public double luminance() {
     // https://www.itu.int/rec/R-REC-BT.601
     return 0.299*r() + 0.587*g() + 0.114*b();
-  }
-
-  // TODO: Make static
-  public java.awt.Color toAwtColor() {
-    return new java.awt.Color((float)r(), (float)g(), (float)b(), (float)a());
   }
 
   public double get(int i) {

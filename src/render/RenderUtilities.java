@@ -63,7 +63,7 @@ public final class RenderUtilities {
   public static void writeBmp(Texture texture, String path) {
     BufferedImage image = new BufferedImage(texture.width(), texture.height(), BufferedImage.TYPE_INT_RGB);
     texture.foreach((int x, int y, Color color) -> {
-      int rgb = color.toAwtColor().getRGB();
+      int rgb = Color.toAwt(color).getRGB();
       image.setRGB(x, y, rgb);
     });
 
