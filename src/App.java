@@ -13,7 +13,6 @@ public class App {
     // Camera
     ConstVector<Vector3> eye = Vector3.BACKWARD.times(5);
     double near = 0.1;
-    double fov = 80;
     // Light
     ConstVector<Vector3> lo = Const.of(new Vector3(4, 4, 4));
     double lPower = 300;
@@ -26,7 +25,7 @@ public class App {
       NormalVector<Vector3> dir = eye
           .plus(Vector3.FORWARD.times(near))
           .plus(
-              // HACK
+              // TODO: Proper camera transform
               Mutable.of(new Vector3(-(u-0.5), v-0.5, 0))
                   .divide(near)
                   .getVec())
@@ -34,15 +33,15 @@ public class App {
 
       // Ray-Sphere intersection test
       ConstVector<Vector3> delta = eye.minus(co);
-      double b = 2*dir.dot(delta);
-      double c = delta.magnitude_2() - cr*cr;
-      double D = b*b - 4*c;
+      final double b = 2*dir.dot(delta);
+      final double c = delta.magnitude_2() - cr*cr;
+      final double D = b*b - 4*c;
 
       if (D < 0) {
         return new Color(0.0);
       }
 
-      double t = Math.min(
+      final double t = Math.min(
           2*c / (-b - Math.sqrt(D)),
           2*c / (-b + Math.sqrt(D)));
 
@@ -51,13 +50,19 @@ public class App {
       ConstVector<Vector3> l = lo.minus(p);
       NormalVector<Vector3> n = p.minus(co).normalized();
 
-      double r_2 = l.magnitude_2();
-      double intensity = lPower * l.normalized().dot(n) / (4*Math.PI * r_2);
+      final double r_2 = l.magnitude_2();
+      final double intensity = lPower * l.normalized().dot(n) / (4*Math.PI * r_2);
 
       return new Color(intensity);
     });
 
-    String path = new java.io.File("./").getAbsolutePath().concat("/sphere.bmp");
-    RenderUtilities.writeBmp(texture, path);
+    String imagesFolder = new java.io.File("./images").getAbsolutePath();
+    String spherePath = imagesFolder.concat("/sphere.bmp");
+    RenderUtilities.writeBmp(texture, spherePath);
+
+    Texture texture1 = RenderUtilities.openBmp(spherePath);
+    texture1.map((double u, double v, Color color) -> (color.luminance() > 1e-4) ?
+        color : new Color(1, 0, 1));
+    RenderUtilities.writeBmp(texture1, imagesFolder.concat("/sphere-1.bmp"));
   }
 }

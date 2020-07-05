@@ -1,5 +1,6 @@
 package render.texture;
 
+// TODO: TextureType => Resolution { LOW(Byte), MEDIUM(Int/Float), HIGH(Double) }
 public enum TextureType {
   BYTE(Byte.BYTES),
   INT(Integer.BYTES),

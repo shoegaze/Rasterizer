@@ -5,22 +5,22 @@ import java.nio.ByteBuffer;
 public class Texture {
   @FunctionalInterface
   public interface TextureMapIndexed {
-    Color map(int x, int y, Color color);
+    Color map(final int x, final int y, Color color);
   }
 
   @FunctionalInterface
   public interface TextureMapUv {
-    Color map(double u, double v, Color color);
+    Color map(final double u, final double v, Color color);
   }
 
   @FunctionalInterface
   public interface TextureForeachIndexed {
-    void each(int x, int y, Color color);
+    void each(final int x, final int y, Color color);
   }
 
   @FunctionalInterface
   public interface TextureForeachUv {
-    void each(double u, double v, Color color);
+    void each(final double u, final double v, Color color);
   }
 
   private final TextureType type;

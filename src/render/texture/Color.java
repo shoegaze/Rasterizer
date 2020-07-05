@@ -1,5 +1,6 @@
 package render.texture;
 
+// TODO: Inherit Vector4
 public class Color {
   private static double normalize(double value) {
     return Math.max(Math.min(value, 1), 0);

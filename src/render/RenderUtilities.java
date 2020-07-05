@@ -2,12 +2,12 @@ package render;
 
 import render.texture.Color;
 import render.texture.Texture;
+import render.texture.TextureType;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 
 public final class RenderUtilities {
   public static void printTexture(Texture texture) {
@@ -38,6 +38,26 @@ public final class RenderUtilities {
     }
 
     System.out.print(s);
+  }
+
+  public static Texture openBmp(String path) {
+    Texture texture = null;
+
+    try {
+      BufferedImage image = ImageIO.read(new File(path));
+      texture = new Texture(TextureType.DOUBLE, image.getWidth(), image.getHeight(), 3);
+      texture.map((int x, int y, Color color) -> {
+        int rgb = image.getRGB(x, y);
+        return Color.from(
+            (rgb >> 16) & 0xFF,
+            (rgb >> 8) & 0xFF,
+            (rgb >> 0) & 0xFF);
+      });
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    return texture;
   }
 
   public static void writeBmp(Texture texture, String path) {
