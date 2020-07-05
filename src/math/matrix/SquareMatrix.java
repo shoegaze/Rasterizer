@@ -5,7 +5,13 @@ import math.vector.Vector;
 
 // Column-major square matrix
 public abstract class SquareMatrix<R extends Vector> {
-  private double[] elements;
+  @FunctionalInterface
+  public interface SquareMatrixMapper {
+    double map(final int i, final int j, double element);
+  }
+
+
+  private final double[] elements;
   private boolean transposed = false;
 
   // Make sure there are only n^2 elements passed in
@@ -43,6 +49,13 @@ public abstract class SquareMatrix<R extends Vector> {
     return Arrays.toString(cols);
   }
 
+
+  protected final int index2dTo1d(int i, int j) {
+    return transposed?
+        getSize()*i + j :
+        getSize()*j + i;
+  }
+
   public final double getElement(int i, int j) {
     return elements[index2dTo1d(i, j)];
   }
@@ -67,9 +80,11 @@ public abstract class SquareMatrix<R extends Vector> {
     transposed = !transposed;
   }
 
-  protected final int index2dTo1d(int i, int j) {
-    return transposed?
-      getSize()*i + j :
-      getSize()*j + i;
+  public final void map(SquareMatrixMapper mapper) {
+    for (int i = 0; i < getSize(); ++i) {
+      for (int j = 0; j < getSize(); j++) {
+        setElement(i, j, mapper.map(i, j, getElement(i, j)));
+      }
+    }
   }
 }

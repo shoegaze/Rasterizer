@@ -13,6 +13,8 @@ public interface IMatrixOperator<T extends SquareMatrix<?>, R extends IMatrixMod
   R divide(double s);
   R dot(T rhs);
   R dot(R rhs);
+  R dotLeft(T lhs);
+  R dotLeft(R lhs);
   R transpose();
   double det();
 }

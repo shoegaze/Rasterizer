@@ -2,7 +2,7 @@ package math.vector;
 
 import math.vector.modifier.ConstVector;
 
-public final class Vector4 extends Vector {
+public class Vector4 extends Vector {
   public static final ConstVector<Vector4> ZERO = new ConstVector<>(new Vector4(0, 0, 0, 0));
   public static final ConstVector<Vector4> ONES = new ConstVector<>(new Vector4(1, 1, 1, 1));
   public static final ConstVector<Vector4> RIGHT = new ConstVector<>(new Vector4(1, 0, 0, 0));

@@ -128,6 +128,16 @@ public final class ConstMatrix<T extends SquareMatrix<?>>
   }
 
   @Override
+  public ConstMatrix<T> dotLeft(T lhs) {
+    return new ConstMatrix<>(lhs).dot(mat);
+  }
+
+  @Override
+  public ConstMatrix<T> dotLeft(ConstMatrix<T> lhs) {
+    return dotLeft(lhs.getMatrix());
+  }
+
+  @Override
   public ConstMatrix<T> transpose() {
     @SuppressWarnings("unchecked")
     T result = (T)mat.copy();

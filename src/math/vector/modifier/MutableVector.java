@@ -7,6 +7,7 @@ import math.vector.Vector3;
 public final class MutableVector<T extends Vector>
   implements IVectorModifier<T, MutableVector<T>>, IFreeze<ConstVector<T>> {
 
+  // NOTE: There is no guarantee this Vector reference is constant.
   private T vec;
 
   public MutableVector(T src) {

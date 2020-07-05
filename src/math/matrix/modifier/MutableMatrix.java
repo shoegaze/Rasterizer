@@ -1,11 +1,13 @@
 package math.matrix.modifier;
 
 import math.matrix.SquareMatrix;
+import math.modifier.Const;
 import math.modifier.IFreeze;
 
 public final class MutableMatrix<T extends SquareMatrix<?>>
   implements IMatrixModifier<T, MutableMatrix<T>>, IFreeze<ConstMatrix<T>> {
 
+  // NOTE: There is no guarantee this Matrix reference is constant.
   private T mat;
 
   @SuppressWarnings("unchecked")
@@ -44,13 +46,7 @@ public final class MutableMatrix<T extends SquareMatrix<?>>
 
   @Override
   public MutableMatrix<T> plus(T rhs) {
-    for (int i = 0; i < mat.getSize(); ++i) {
-      for (int j = 0; j < mat.getSize(); ++j) {
-        double l = mat.getElement(i, j);
-        double r = rhs.getElement(i, j);
-        mat.setElement(i, j, l+r);
-      }
-    }
+    mat.map((i, j, l) -> l+rhs.getElement(i, j));
 
     return this;
   }
@@ -62,13 +58,7 @@ public final class MutableMatrix<T extends SquareMatrix<?>>
 
   @Override
   public MutableMatrix<T> minus(T rhs) {
-    for (int i = 0; i < mat.getSize(); ++i) {
-      for (int j = 0; j < mat.getSize(); ++j) {
-        double l = mat.getElement(i, j);
-        double r = rhs.getElement(i, j);
-        mat.setElement(i, j, l-r);
-      }
-    }
+    mat.map((i, j, l) -> l-rhs.getElement(i, j));
 
     return this;
   }
@@ -80,12 +70,7 @@ public final class MutableMatrix<T extends SquareMatrix<?>>
 
   @Override
   public MutableMatrix<T> times(double s) {
-    for (int i = 0; i < mat.getSize(); ++i) {
-      for (int j = 0; j < mat.getSize(); ++j) {
-        double l = mat.getElement(i, j);
-        mat.setElement(i, j, l*s);
-      }
-    }
+    mat.map((i, j, l) -> l*s);
 
     return this;
   }
@@ -97,7 +82,8 @@ public final class MutableMatrix<T extends SquareMatrix<?>>
 
   @Override
   public MutableMatrix<T> dot(T rhs) {
-    mat = new ConstMatrix<>(mat)
+    // HACK
+    mat = Const.of(mat)
       .dot(rhs)
       .getMatrix();
 
@@ -107,6 +93,21 @@ public final class MutableMatrix<T extends SquareMatrix<?>>
   @Override
   public MutableMatrix<T> dot(MutableMatrix<T> rhs) {
     return dot(rhs.mat);
+  }
+
+  @Override
+  public MutableMatrix<T> dotLeft(T lhs) {
+    // HACK
+    mat = Const.of(lhs)
+        .dot(mat)
+        .getMatrix();
+
+    return this;
+  }
+
+  @Override
+  public MutableMatrix<T> dotLeft(MutableMatrix<T> lhs) {
+    return dotLeft(lhs.mat);
   }
 
   @Override
