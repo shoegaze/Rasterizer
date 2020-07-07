@@ -62,8 +62,9 @@ public final class RenderUtilities {
 
   public static void writeBmp(Texture texture, String path) {
     BufferedImage image = new BufferedImage(texture.width(), texture.height(), BufferedImage.TYPE_INT_RGB);
+
     texture.foreach((int x, int y, Color color) -> {
-      int rgb = Color.toAwt(color).getRGB();
+      final int rgb = Color.toAwt(color).getRGB();
       image.setRGB(x, y, rgb);
     });
 
@@ -74,5 +75,7 @@ public final class RenderUtilities {
     }
   }
 
-  private RenderUtilities() {}
+  private RenderUtilities() {
+    throw new UnsupportedOperationException("This class cannot be instantiated");
+  }
 }

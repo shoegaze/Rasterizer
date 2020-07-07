@@ -1,7 +1,10 @@
 package render.texture;
 
+import jdk.swing.interop.SwingInterOpUtils;
+
 import java.nio.ByteBuffer;
 
+// Image data container with origin at bottom-left
 public class Texture {
   @FunctionalInterface
   public interface TextureMapIndexed {
@@ -23,6 +26,7 @@ public class Texture {
     void each(final double u, final double v, Color color);
   }
 
+
   private final TextureType type;
   private final ByteBuffer buffer;
   private final int width;
@@ -37,6 +41,10 @@ public class Texture {
     this.channels = channels;
     // TODO: Use object pooling to reuse memory chunks
     this.buffer = ByteBuffer.allocate(size());
+  }
+
+  public TextureType type() {
+    return type;
   }
 
   public int size() {
@@ -90,7 +98,7 @@ public class Texture {
   }
 
   public Color getColor(int x, int y) {
-    return getBufferColor(index2Dto1D(x, y));
+    return getBufferColor(index2Dto1D(x, height-1 - y));
   }
 
   public void setColor(int x, int y, Color color) {

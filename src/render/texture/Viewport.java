@@ -1,4 +1,4 @@
 package render.texture;
 
-public class TextureViewport {
+public class Viewport {
 }
