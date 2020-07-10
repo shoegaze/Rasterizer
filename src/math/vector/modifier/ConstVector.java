@@ -117,19 +117,19 @@ public class ConstVector<T extends Vector>
   }
 
   @Override
-  public double magnitude_2() {
+  public double length_2() {
     return this.dot(vec);
   }
 
   @Override
-  public double magnitude() {
-    return Math.sqrt(magnitude_2());
+  public double length() {
+    return Math.sqrt(length_2());
   }
 
   @Override
   public NormalVector<T> normalized() {
     return new NormalVector<>(
-      this.divide(magnitude()).getVec());
+      this.divide(length()).getVec());
   }
 
   @Override

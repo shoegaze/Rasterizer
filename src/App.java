@@ -1,17 +1,11 @@
 import math.modifier.Const;
 import math.modifier.Mutable;
-import math.vector.Vector;
 import math.vector.Vector2;
 import math.vector.Vector3;
 import math.vector.modifier.ConstVector;
 import math.vector.modifier.NormalVector;
 import render.RenderUtilities;
 import render.texture.*;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class App {
   public static void main(String[] args) {
@@ -22,8 +16,8 @@ public class App {
     double focus = 0.05;
     double near = 0.01;
     // Light
-    ConstVector<Vector3> lo = Const.of(new Vector3(4, 4, -4));
-    double lPower = 500;
+    ConstVector<Vector3> lo = Const.of(new Vector3(4, 3, -4));
+    double lPower = 700;
     // Sphere
     ConstVector<Vector3> co = Vector3.ZERO;
     double cr = 2;
@@ -56,10 +50,14 @@ public class App {
       // Light calculation
       ConstVector<Vector3> p = eye.plus(dir.times(t));
       ConstVector<Vector3> l = lo.minus(p);
-      NormalVector<Vector3> n = p.minus(co).normalized();
+      NormalVector<Vector3> n = co.minus(p).normalized();
 
       final double r_2 = l.length_2();
-      final double intensity = lPower * -l.normalized().dot(n) / (4*Math.PI * r_2);
+      final double intensity = lPower * l.normalized().dot(n) / (4*Math.PI * r_2);
+
+      if (intensity < 0) {
+        return new Color(0, 1, 1);
+      }
 
       return new Color(intensity);
     });
@@ -69,25 +67,46 @@ public class App {
     RenderUtilities.writeBmp(texture, spherePath);
 
     Texture texture1 = RenderUtilities.openBmp(spherePath);
-    texture1.map((double u, double v, Color color) -> (color.luminance() > 0) ?
-        color : new Color(1, 0, 1));
+    texture1.map((int x, int y, Color color) -> {
+      return (color.luminance() > 0) ?
+        color : new Color(1, 0, 1);
+    });
+
+//    texture1.map((double u, double v, Color color) -> {
+//      return color;
+
+//      return (color.luminance() > 0) ?
+//        color : new Color(1, 0, 1);
+//    });
     RenderUtilities.writeBmp(texture1, imagesFolder.concat("/sphere-1.bmp"));
 
     TextureReference ref = new TextureReference(
         texture,
         new TextureRegion(
-          new Vector2(0, 0),
-          new Vector2(400, 400)));
+          new Vector2(90, 200),
+          new Vector2(310, 360)));
 
     Texture texture2 = ref.toTexture();
+    texture2.foreach((double u, double v, Color color) -> {
+//      System.out.println(String.format("(%f, %f) -> %s", u, v, color.toString()));
+    });
     RenderUtilities.writeBmp(texture2, imagesFolder.concat("/sphere-slice.bmp"));
+
+    var s = RenderUtilities.openBmp(imagesFolder.concat("/sphere-slice.bmp"));
+    s.map((double u, double v, Color color) -> (color.luminance() > 0) ?
+        color : new Color(1, 0, 1));
+    RenderUtilities.writeBmp(s, imagesFolder.concat("/sphere-2.bmp"));
+
 
     Texture texture3 = new Texture(TextureType.FLOAT, 2, 2, 3);
     texture3.setColor(0, 0, new Color(0, 0, 0));
     texture3.setColor(1, 0, new Color(1, 0, 0));
     texture3.setColor(0, 1, new Color(0, 0, 1));
     texture3.setColor(1, 1, new Color(1, 1, 1));
-
     RenderUtilities.writeBmp(texture3, imagesFolder.concat("/orientation-test.bmp"));
+
+    Texture texture4 = new Texture(TextureType.FLOAT, 400, 400, 3);
+    texture4.map((double u, double v, Color color) -> new Color(u, v, 0));
+    RenderUtilities.writeBmp(texture4, imagesFolder.concat("/uv.bmp"));
   }
 }

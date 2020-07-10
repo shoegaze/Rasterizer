@@ -21,7 +21,7 @@ public final class NormalVector<T extends Vector> extends ConstVector<T> {
   }
 
   @Override
-  public double magnitude_2() {
+  public double length_2() {
     return 1;
   }
 
