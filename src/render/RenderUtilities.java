@@ -10,6 +10,11 @@ import java.io.File;
 import java.io.IOException;
 
 public final class RenderUtilities {
+  private RenderUtilities() {
+    throw new UnsupportedOperationException("This class cannot be instantiated");
+  }
+
+
   public static void printTexture(Texture texture) {
     StringBuilder s = new StringBuilder(texture.height() * (texture.width()+1));
 
@@ -40,6 +45,10 @@ public final class RenderUtilities {
     System.out.print(s);
   }
 
+//  public static Texture diff(Texture expected, Texture actual) {
+//    // TODO
+//  }
+
   public static Texture openBmp(String path) {
     Texture texture = null;
 
@@ -47,7 +56,8 @@ public final class RenderUtilities {
       BufferedImage image = ImageIO.read(new File(path));
       texture = new Texture(TextureType.DOUBLE, image.getWidth(), image.getHeight(), 3);
       texture.map((int x, int y, Color color) -> {
-        int rgb = image.getRGB(x, y);
+        int rgb = image.getRGB(x, image.getHeight()-1 - y);
+        rgb = image.getRGB(x, y);
         return Color.from(
             (rgb >> 16) & 0xFF,
             (rgb >> 8) & 0xFF,
@@ -61,7 +71,10 @@ public final class RenderUtilities {
   }
 
   public static void writeBmp(Texture texture, String path) {
-    BufferedImage image = new BufferedImage(texture.width(), texture.height(), BufferedImage.TYPE_INT_RGB);
+    BufferedImage image = new BufferedImage(
+        texture.width(),
+        texture.height(),
+        BufferedImage.TYPE_INT_RGB);
 
     texture.foreach((int x, int y, Color color) -> {
       final int rgb = Color.toAwt(color).getRGB();
@@ -75,7 +88,7 @@ public final class RenderUtilities {
     }
   }
 
-  private RenderUtilities() {
-    throw new UnsupportedOperationException("This class cannot be instantiated");
-  }
+//  public static void diffBmp(String expectedPath, String actualPath) {
+//    // TODO
+//  }
 }

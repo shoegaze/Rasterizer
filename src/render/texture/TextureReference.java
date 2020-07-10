@@ -18,7 +18,7 @@ public class TextureReference {
 
     return target.getColor(
         (int)start.x() + x,
-        target.height()-1 - ((int)start.y() + y));
+        (int)start.y() + y);
   }
 
   public void setColor(int x, int y, Color color) {

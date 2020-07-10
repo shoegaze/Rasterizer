@@ -40,6 +40,7 @@ public class Texture {
     // TODO: Support channels > 4 or enforce channels <= 3
     this.channels = channels;
     // TODO: Use object pooling to reuse memory chunks
+    // NOTE: Buffer space is y-flipped
     this.buffer = ByteBuffer.allocate(size());
   }
 
@@ -63,8 +64,8 @@ public class Texture {
     return channels;
   }
 
-  private int index2Dto1D(int i, int j) {
-    return channels*type.bytes * (j*width + i);
+  private int index2Dto1D(int x, int y) {
+    return channels*type.bytes * (y*width + x);
   }
 
   private Color getBufferColor(int i) {
@@ -102,7 +103,7 @@ public class Texture {
   }
 
   public void setColor(int x, int y, Color color) {
-    putBufferColor(index2Dto1D(x, y), color);
+    putBufferColor(index2Dto1D(x,  y), color);
   }
 
   public Color getColor(double u, double v) {
