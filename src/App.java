@@ -82,6 +82,9 @@ public class App {
           new Vector2(310, 360)));
 
     Texture texture2 = ref.toTexture();
+    texture2.foreach((double u, double v, Color color) -> {
+//      System.out.println(String.format("(%f, %f) -> %s", u, v, color.toString()));
+    });
     RenderUtilities.writeBmp(texture2, imagesFolder.concat("/sphere-slice.bmp"));
 
     var s = RenderUtilities.openBmp(imagesFolder.concat("/sphere-slice.bmp"));

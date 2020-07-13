@@ -99,7 +99,7 @@ public class Texture {
   }
 
   public Color getColor(int x, int y) {
-    return getBufferColor(index2Dto1D(x, height-1 - y));
+    return getBufferColor(index2Dto1D(x,  y));
   }
 
   public void setColor(int x, int y, Color color) {
