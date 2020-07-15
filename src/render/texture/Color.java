@@ -25,28 +25,26 @@ public final class Color extends Vector4 {
   }
 
   public static Color from(int r, int g, int b) {
-    return new Color(r, g, b, Integer.MAX_VALUE);
+    return Color.from(r, g, b, Integer.MAX_VALUE);
   }
 
   public static Color from(byte r, byte g, byte b) {
-    return new Color(r, g, b, Byte.MAX_VALUE);
+    return Color.from(r, g, b, Byte.MAX_VALUE);
   }
 
-  public static Color from(int y) {
-    return new Color(normalize(y));
+  public static Color from(int argb) {
+    final int a = (argb >> 24) & 0xFF;
+    final int r = (argb >> 16) & 0xFF;
+    final int g = (argb >> 8) & 0xFF;
+    final int b = (argb >> 0) & 0xFF;
+
+    return new Color(
+        r / 255.0,
+        g / 255.0,
+        b / 255.0,
+        a / 255.0);
   }
 
-  public static Color from(byte y) {
-    return new Color(normalize(y));
-  }
-
-  public static java.awt.Color toAwt(Color color) {
-      return new java.awt.Color(
-          (float)color.r(),
-          (float)color.g(),
-          (float)color.b(),
-          (float)color.a());
-  }
 
   public Color(double r, double g, double b, double a) {
     super(
@@ -88,6 +86,14 @@ public final class Color extends Vector4 {
   public double luminance() {
     // https://www.itu.int/rec/R-REC-BT.601
     return 0.299*r() + 0.587*g() + 0.114*b();
+  }
+
+  public int getARGB() {
+    int rgba = (int)(a() * 0xFF);
+    rgba = (rgba << 8) | (int)(r() * 0xFF);
+    rgba = (rgba << 8) | (int)(g() * 0xFF);
+    rgba = (rgba << 8) | (int)(b() * 0xFF);
+    return rgba;
   }
 
   public double get(int i) {

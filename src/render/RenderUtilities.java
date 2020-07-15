@@ -45,24 +45,18 @@ public final class RenderUtilities {
     System.out.print(s);
   }
 
-//  public static Texture diff(Texture expected, Texture actual) {
-//    // TODO
-//  }
-
   public static Texture openBmp(String path) {
     Texture texture = null;
 
     try {
       BufferedImage image = ImageIO.read(new File(path));
+      // HACK: TextureType.DOUBLE covers all bases
       texture = new Texture(TextureType.DOUBLE, image.getWidth(), image.getHeight(), 3);
-      texture.map((int x, int y, Color color) -> {
-        int rgb = image.getRGB(x, image.getHeight()-1 - y);
-        rgb = image.getRGB(x, y);
-        return Color.from(
-            (rgb >> 16) & 0xFF,
-            (rgb >> 8) & 0xFF,
-            (rgb >> 0) & 0xFF);
-      });
+
+      // Apparently getRGB really means getARGB
+      texture.map((int x, int y, Color color) ->
+          Color.from(image.getRGB(x, image.getHeight()-1 - y)));
+
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -76,10 +70,8 @@ public final class RenderUtilities {
         texture.height(),
         BufferedImage.TYPE_INT_RGB);
 
-    texture.foreach((int x, int y, Color color) -> {
-      final int rgb = Color.toAwt(color).getRGB();
-      image.setRGB(x, y, rgb);
-    });
+    texture.foreach((int x, int y, Color color) ->
+        image.setRGB(x, texture.height()-1 - y, color.getARGB()));
 
     try {
       ImageIO.write(image, "bmp", new File(path));
@@ -87,8 +79,4 @@ public final class RenderUtilities {
       e.printStackTrace();
     }
   }
-
-//  public static void diffBmp(String expectedPath, String actualPath) {
-//    // TODO
-//  }
 }
